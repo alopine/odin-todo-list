@@ -1,0 +1,23 @@
+{
+  "name": "odin-todo-list",
+  "version": "1.0.0",
+  "description": "Odin Todo List is a web app built for the Odin Project's JavaScript project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alopine/odin-todo-list.git"
+  },
+  "author": "alopine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alopine/odin-todo-list/issues"
+  },
+  "homepage": "https://github.com/alopine/odin-todo-list#readme",
+  "devDependencies": {
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  }
+}

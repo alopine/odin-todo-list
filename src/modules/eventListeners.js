@@ -1,0 +1,1 @@
+// Add event listeners to DOM elements

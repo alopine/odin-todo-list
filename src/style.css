@@ -1,8 +1,10 @@
 /* || Custom properties */
 
 :root {
-    --main-text-color: #FFFFFF87;
+    --main-text-color: #E3E3E3;
+    --highlight-color: #363636;
 }
+
 
 /* || General styles */
 
@@ -10,6 +12,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    border: none;
 }
 
 body {
@@ -20,18 +23,90 @@ body {
     color: var(--main-text-color);
 }
 
-.sidebar {
-    background-color: #282828;
-    padding: 2rem 0 0 2rem;
+.flex {
     display: flex;
+}
+
+.flexColumn {
     flex-direction: column;
 }
 
+
+/* || Sidebar */
+
+.sidebar {
+    background-color: #282828;
+    padding: 2rem 2rem 0;
+}
+
 .heading {
-    font-size: 1.2rem;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0.5rem;
+    font-size: 1.1rem;
     font-weight: 700;
 }
 
+.newProject {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    font-size: inherit;
+    color: var(--main-text-color);
+}
+
+.projectsEntry {
+    padding: 0.5rem;
+}
+
+.newProject, .projectsEntry {
+    border-radius: 5px;
+}
+
+.newProject:hover, .projectsEntry:hover {
+    background-color: var(--highlight-color);
+}
+
+
+/* || Main */
+
 main {
     background-color: #1F1F1F;
+    justify-content: center;
+}
+
+.projectDisplay {
+    width: 50%;
+    padding: 2rem;
+    border: 1px solid red;
+}
+
+.projectTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.projectList {
+    list-style-type: none;
+}
+
+.projectTodo {
+    padding: 0.5rem 0.5rem 0.5rem 0;
+    justify-content: space-between;
+}
+
+.todoLeft>button {
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.taskCheckbox {
+
+}
+
+.newTask {
+    
 }

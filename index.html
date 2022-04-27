@@ -10,13 +10,39 @@
     <title>Odin Todo List</title>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="heading">
-            Projects
+    <div class="sidebar flex flexColumn">
+        <div class="heading flex">
+            <span>Projects</span>
+            <button class="newProject">+</button>
+        </div>
+        <div id="projectsList">
+            <div class="projectsEntry">
+                Inbox
+            </div>
         </div>
     </div>
-    <main>
-
+    <main class="flex">
+        <div class="projectDisplay flex flexColumn">
+            <div class="projectTitle">
+                <span>Inbox</span>
+            </div>
+            <ul class="projectList">
+                <li class="projectTodo flex">
+                    <div class="todoLeft">
+                        <button class="taskCheckbox"> </button>
+                        <span>Task name</span>
+                    </div>
+                    <div class="todoRight">
+                        <button>Edit</button>
+                        <button>Date</button>
+                    </div>
+                </li>
+                <li>
+                    <button class="newTask">+</button>
+                    <span>Add task</span>
+                </li>
+            </ul>
+        </div>
     </main>
 </body>
 </html>

@@ -47,6 +47,10 @@ body {
     font-weight: 700;
 }
 
+.heading span {
+    margin-bottom: 0.5rem;
+}
+
 .newProject {
     width: 1.5rem;
     height: 1.5rem;
@@ -77,7 +81,7 @@ main {
 }
 
 .projectDisplay {
-    width: 50%;
+    width: 75%;
     padding: 2rem;
     border: 1px solid red;
 }
@@ -85,28 +89,54 @@ main {
 .projectTitle {
     font-size: 1.5rem;
     font-weight: 700;
+    margin-bottom: 0.5rem;
 }
 
 .projectList {
     list-style-type: none;
 }
 
-.projectTodo {
+.projectList>li {
+    border-top: 1px solid #363636;
+}
+
+.projectTodo, .addTask {
     padding: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.projectTodo {
     justify-content: space-between;
 }
 
-.todoLeft>button {
-    height: 13px;
-    width: 13px;
-    border-radius: 50%;
-    margin-right: 0.5rem;
+.projectTodo>div {
+    align-items: center;
 }
 
 .taskCheckbox {
-
+    border: 1px solid #E3E3E3;
 }
 
-.newTask {
-    
+.taskCheckbox, .addTask button {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    background-color: transparent;
+}
+
+.addTask button { 
+    line-height: 16px;
+}
+
+.addTask span {
+    color: #808080;
+}
+
+.addTask:hover span, .addTask button {
+    color: #DE4C4A;
+}
+
+.addTask:hover button {
+    color:#E3E3E3;
+    background-color: #DE4C4A;
 }

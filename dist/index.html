@@ -15,31 +15,32 @@
             <span>Projects</span>
             <button class="newProject">+</button>
         </div>
-        <div id="projectsList">
-            <div class="projectsEntry">
-                Inbox
-            </div>
-        </div>
+        <ul id="projectsList">
+        </ul>
     </div>
     <main class="flex">
         <div class="projectDisplay flex flexColumn">
-            <div class="projectTitle">
-                <span>Inbox</span>
-            </div>
-            <ul class="projectList">
-                <li class="projectTodo flex">
-                    <div class="todoLeft flex">
-                        <button class="taskCheckbox"> </button>
-                        <span>Task name</span>
-                    </div>
-                    <div class="todoRight flex">
-                        <button class="taskEditBtn">Edit</button>
-                        <button class="taskDateBtn">Date</button>
-                    </div>
-                </li>
+            <div class="projectTitle"></div>
+            <ul class="todosList">
                 <li class="addTask">
-                    <button>+</button>
+                    <button class="addTaskBtn">+</button>
                     <span>Add task</span>
+                </li>
+                <li class="addTaskMenuWrapper hidden">
+                    <form class="addTaskMenu">
+                        <input type="text" name="todoName" id="formTodoName" placeholder="Task name" autocomplete="off">
+                        <textarea name="todoDesc" id="formTodoDesc" placeholder="Description"></textarea>
+                        <input type="date" name="todoDueDate" id="formTodoDueDate">
+                        <select name="todoPriority" id="formTodoPriority">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </form>
+                    <div class="addTaskMenuButtons flex">
+                        <button class="addTaskMainBtn" disabled>Add Task</button>
+                        <button class="addTaskCancelBtn">Cancel</button>
+                    </div>
                 </li>
             </ul>
         </div>

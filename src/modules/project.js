@@ -4,7 +4,6 @@ export default class Project {
     constructor(title) {
         this._id = uuid();
         this._title = title;
-        this._active = false;
         this._projectTodos = [];
     }
 
@@ -28,23 +27,25 @@ export default class Project {
         }
     }
 
-    get active() {
-        return this._active;
-    }
-
-    set active(arg) {
-        if (arg) {
-            this._active = arg;
-        }
-    }
-
     get projectTodos() {
         return this._projectTodos;
     }
 
-    set projectTodos(todo) {
-        if (todo) {
-            this._projectTodos.push(todo);
+    set projectTodos(arg) {
+        if (arg) {
+            this._projectTodos = arg;
         }
+    }
+
+    addTodo(newTodo) {
+        if (this.projectTodos.find((todo) => todo.id === newTodo.id)) {
+            return;
+        } else {
+            this.projectTodos.push(newTodo);
+        }
+    }
+
+    deleteTodo(delTodoID) {
+        this.projectTodos = this.projectTodos.filter((todo) => todo.id !== delTodoID);
     }
 }

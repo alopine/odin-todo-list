@@ -1,7 +1,7 @@
 import Todo from "./todo";
 
 export default class display {
-    // Project functions
+    // Project Functions
     static renderProject(project) {
         const projectsList = document.getElementById("projectsList");
         let newNode = document.createElement("li");
@@ -16,19 +16,19 @@ export default class display {
         projectTitle.innerText = title;
     }
 
-    // Function for add project button
-    // If add project form doesn't already exist
-    // Adds a form at bottom of project list prompting for name
-    // Cancel and add buttons below
+    // Function to switch active project
 
-    // Function to change active project
+    // Function for add project button
+        // If add project form doesn't already exist
+        // Adds a form at bottom of project list prompting for name
+        // Cancel and add buttons below
 
     // Function to toggle edit project
         // Brings up similar interface as add but with name prefilled
 
     // Function to delete project
 
-    // Todo functions
+    // Todo Functions
     static renderTodo(todo) {
         const todosList = document.querySelector(".todosList");
         const addTask = document.querySelector(".addTask");
@@ -55,10 +55,6 @@ export default class display {
         todosList.insertBefore(newNode, addTask);
     }
 
-    // Function for add task button
-        // Replaces .addTask bar with form for task name, description, due date, priority
-        // Add task and cancel buttons below
-
     static addTaskMenu() {
         const addTaskBar = document.querySelector(".addTask");
         const addTaskMenu = document.querySelector(".addTaskMenuWrapper");
@@ -71,33 +67,28 @@ export default class display {
         const todoDesc = document.getElementById("formTodoDesc").value;
         const todoDueDate = document.getElementById("formTodoDueDate").value;
         const todoPriority = document.getElementById("formTodoPriority").value;
-        const submit = document.querySelector(".addTaskMainBtn");
-        submit.disabled = true;
+        this.addTaskClear();
         return new Todo(todoName, todoDesc, todoDueDate, todoPriority);
     }
 
-    static addTaskCancelBtn() {
+    static addTaskClear() {
         const addTaskBar = document.querySelector(".addTask");
         const addTaskMenu = document.querySelector(".addTaskMenuWrapper");
         const addTaskForm = document.querySelector(".addTaskMenu");
         addTaskBar.classList.remove("hidden");
         addTaskMenu.classList.add("hidden");
         addTaskForm.reset();
+        const submit = document.querySelector(".addTaskMainBtn");
+        submit.disabled = true;
     }
+
+    // Function to bring up todo details view
+
+    // Function to toggle edit todo
+        // Brings up similar interface as add but with details prefilled
 
     static deleteTodo(id) {
         document.getElementById(id).remove();
     }
 
-    // Function to toggle edit todo
-    // Brings up similar interface as add but with details prefilled
-
-    // Function to bring up todo view
 }
-
-
-
-
-
-
-

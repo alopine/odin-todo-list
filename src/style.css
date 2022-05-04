@@ -54,27 +54,32 @@ body {
     margin-bottom: 0.5rem;
 }
 
-.newProject {
-    width: 1.5rem;
-    height: 1.5rem;
+.newProjectBtn {
     border: 0;
     background-color: transparent;
-    font-size: inherit;
+    font-size: 1rem;
     color: var(--main-text-color);
+    margin-right: 0.5rem;
 }
 
-.projectsEntry {
+.projectsEntry, #addProject {
     padding: 0.5rem;
 }
 
-.newProject, .projectsEntry {
+.newProject, .projectsEntry, #addProject {
     border-radius: 5px;
 }
 
-.newProject:hover, .projectsEntry:hover, .todoRight>button:hover {
+#addProject:hover, .projectsEntry:hover, .todoRight>button:hover {
     background-color: var(--hover-color);
 }
 
+/* || Add Project Menu */
+
+#formProjectName {
+    background-color: #282828;
+    height: 1rem;
+}
 
 /* || Main */
 
@@ -149,15 +154,15 @@ main {
     background-color: transparent;
 }
 
-.addTaskBtn { 
+ .newProjectBtn, .addTaskBtn { 
     line-height: 1rem;
 }
 
-.addTask span {
+#addProject span, .newProjectBtn, .addTask span {
     color: var(--outline-color);
 }
 
-.addTask:hover span, .addTaskBtn {
+#addProject:hover span, #addProject:hover .newProjectBtn, .addTask:hover span, .addTaskBtn {
     color: var(--highlight-color);
 }
 
@@ -167,25 +172,28 @@ main {
 }
 
 /* Add Task Menu */
-.addTaskMenuWrapper {
+.addProjectMenuWrapper, .addTaskMenuWrapper {
     padding-top: 0.5rem;
 }
 
-.addTaskMenu, #formTodoDueDate, #formTodoPriority {
+.addForm, #formTodoDueDate, #formTodoPriority {
     border: 1px solid var(--hover-color);
 }
 
-.addTaskMenu, #formTodoDueDate, #formTodoPriority {
+.addForm, #formTodoDueDate, #formTodoPriority {
     border-radius: 10px;
     padding: 0.5rem;
 }
 
-#formTodoName, #formTodoDueDate, #formTodoDesc, #formTodoPriority {
-    background-color: var(--main-bg-color);
+#formProjectName, #formTodoName, #formTodoDueDate, #formTodoDesc, #formTodoPriority {
     font-size: 1em;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--main-text-color);
     outline: none;
+}
+
+#formTodoName, #formTodoDueDate, #formTodoDesc, #formTodoPriority {
+    background-color: var(--main-bg-color);
 }
 
 #formTodoDueDate, #formTodoPriority {
@@ -197,7 +205,7 @@ main {
     color-scheme: dark;
 }
 
-#formTodoName, #formTodoDesc {
+#formProjectName, #formTodoName, #formTodoDesc {
     width: 100%;
 }
 
@@ -212,36 +220,36 @@ main {
     padding-right: 1rem;
 }
 
-.addTaskMenuButtons {
+.addFormBtns {
     margin-top: 0.5rem;
     column-gap: 0.75rem;
 }
 
-.addTaskMainBtn {
+.addFormMainBtn {
     background-color: var(--highlight-color);
 }
 
-.addTaskMainBtn:hover:enabled{
+.addFormMainBtn:hover:enabled{
     background-color: #C53727;
 }
 
-.addTaskMainBtn:disabled {
+.addFormMainBtn:disabled {
     filter: brightness(0.8);
 }
 
-.addTaskCancelBtn {
+.addFormCancelBtn {
     background-color: #292929;
 }
 
-.addTaskCancelBtn:hover {
+.addFormCancelBtn:hover {
     background-color: #3D3D3D;
 }
 
-.addTaskMainBtn, .addTaskCancelBtn {
+.addFormMainBtn, .addFormCancelBtn {
     border: none;
     border-radius: 5px;
     outline: none;
     color: var(--main-text-color);
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 0.5rem 0.75rem;
 }

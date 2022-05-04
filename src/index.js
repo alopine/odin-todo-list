@@ -27,7 +27,7 @@ class events {
     }
 
     static addTaskMenu() {
-        const addTask = document.querySelector(".addTask");
+        const addTask = document.getElementById("addTodo");
         addTask.addEventListener("click", () => {
             display.addTaskMenu();
         })
@@ -35,7 +35,7 @@ class events {
 
     static addTaskSubmitChecker() {
         const inputName = document.getElementById("formTodoName");
-        const submit = document.querySelector(".addTaskMainBtn");
+        const submit = document.getElementById("addTodoBtn");
         inputName.addEventListener("input", () => {
             if (inputName.value.length === 0) {
                 submit.disabled = true;
@@ -46,7 +46,7 @@ class events {
     }
 
     static addTaskSubmit() {
-        const submit = document.querySelector(".addTaskMainBtn");
+        const submit = document.getElementById("addTodoBtn");
         submit.addEventListener("click", () => {
             if (submit.disabled === false) {
                 activeProject.addTodo(display.addTaskSubmit());
@@ -58,8 +58,8 @@ class events {
     }
 
     static addTaskCancelBtn() {
-        const addTaskCancelBtn = document.querySelector(".addTaskCancelBtn");
-        addTaskCancelBtn.addEventListener("click", () => {
+        const addTodoCancel = document.getElementById("addTodoCancel");
+        addTodoCancel.addEventListener("click", () => {
             display.addTaskClear();
         })
     }
@@ -84,10 +84,11 @@ class events {
 
 // Temporary testing
 window.onload = () => {
-    activeProject.addTodo(new Todo("test 1", "test description", "2022-04-30", "Low"));
-    activeProject.addTodo(new Todo("test 2", "test description", "2022-04-30", "Low"));
-    activeProject.addTodo(new Todo("test 3", "test description", "2022-04-30", "Low"));
+    activeProject.addTodo(new Todo("Test Todo 1", "Test description 1", "2022-04-30", "Low"));
+    activeProject.addTodo(new Todo("Test Todo 2", "Test description 2", "2022-04-30", "Low"));
+    activeProject.addTodo(new Todo("Test Todo 3", "Test description 3", "2022-04-30", "Low"));
     console.log(activeProject);
+    app.addProject(new Project("Test Project 1"));
     app.allProjects.forEach((project) => {
         display.renderProject(project);
     });

@@ -4,11 +4,12 @@ export default class display {
     // Project Functions
     static renderProject(project) {
         const projectsList = document.getElementById("projectsList");
+        const addProject = document.getElementById("addProject");
         let newNode = document.createElement("li");
         newNode.classList.add("projectsEntry");
         newNode.id = project.id;
         newNode.innerText = project.title;
-        projectsList.appendChild(newNode);
+        projectsList.insertBefore(newNode, addProject);
     }
 
     static renderActiveProject(title) {
@@ -17,9 +18,10 @@ export default class display {
     }
 
     // Function to switch active project
+        // Add active styling to active project
 
     // Function for add project button
-        // If add project form doesn't already exist
+        // Toggle project add form visibility
         // Adds a form at bottom of project list prompting for name
         // Cancel and add buttons below
 
@@ -31,7 +33,7 @@ export default class display {
     // Todo Functions
     static renderTodo(todo) {
         const todosList = document.querySelector(".todosList");
-        const addTask = document.querySelector(".addTask");
+        const addTask = document.getElementById("addTodo");
         let newNode = document.createElement("li");
         newNode.classList.add("projectTodo", "flex");
         newNode.id = todo.id;
@@ -72,13 +74,13 @@ export default class display {
     }
 
     static addTaskClear() {
-        const addTaskBar = document.querySelector(".addTask");
+        const addTaskBar = document.getElementById("addTodo");
         const addTaskMenu = document.querySelector(".addTaskMenuWrapper");
-        const addTaskForm = document.querySelector(".addTaskMenu");
+        const addTaskForm = document.getElementById("addTodoForm");
         addTaskBar.classList.remove("hidden");
         addTaskMenu.classList.add("hidden");
         addTaskForm.reset();
-        const submit = document.querySelector(".addTaskMainBtn");
+        const submit = document.getElementById("addTodoBtn");
         submit.disabled = true;
     }
 

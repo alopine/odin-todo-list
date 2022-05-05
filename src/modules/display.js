@@ -6,9 +6,13 @@ export default class display {
         const projectsList = document.getElementById("projectsList");
         const addProject = document.getElementById("addProject");
         let newNode = document.createElement("li");
-        newNode.classList.add("projectsEntry");
+        newNode.classList.add("projectsEntry", "flex");
         newNode.id = project.id;
-        newNode.innerText = project.title;
+        newNode.innerHTML = `
+        <span>${project.title}</span>
+        <button class="projectMoreOptionsBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#808080" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+        </button>`
         projectsList.insertBefore(newNode, addProject);
     }
 

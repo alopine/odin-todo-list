@@ -64,6 +64,7 @@ body {
 
 .projectsEntry, #addProject {
     padding: 0.5rem;
+    height: 2rem;
 }
 
 .newProject, .projectsEntry, #addProject {
@@ -72,6 +73,14 @@ body {
 
 #addProject:hover, .projectsEntry:hover, .todoRight>button:hover {
     background-color: var(--hover-color);
+}
+
+.projectMoreOptionsBtn, .newProjectBtn {
+    display: none;
+}
+
+.projectsEntry:hover .projectMoreOptionsBtn, #addProject:hover .newProjectBtn {
+    display: initial;
 }
 
 /* || Add Project Menu */
@@ -115,11 +124,11 @@ main {
     padding: 0.5rem 0.5rem 0.5rem 0;
 }
 
-.projectTodo {
+.projectTodo, .projectsEntry, #addProject {
     justify-content: space-between;
 }
 
-.projectTodo>div {
+.projectTodo>div, .projectsEntry {
     align-items: center;
 }
 
@@ -138,7 +147,7 @@ main {
     color: var(--outline-color);
 }
 
-.todoRight>button {
+.todoRight>button, .projectMoreOptionsBtn {
     border: 0;
     border-radius: 5px;
     background-color: transparent;

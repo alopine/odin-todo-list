@@ -9,14 +9,61 @@ let activeProject = app.allProjects.find((project) => project.id === app.activeP
 
 class events {
     static pageLoad() {
+        this.projectListeners();
         this.todoListeners();
     }
 
     // Project Listeners
-        // Listener for switching active project -- sidear
-        // Listener for add project button
-        // Listener for editing project
-        // Listener for deleting project
+    static projectListeners() {
+        this.addProjectMenu();
+        this.addProjectSubmitChecker();
+        this.addProjectSubmit();
+        this.addProjectCancelBtn();
+    }
+
+    // Listener for switching active project -- sidebar
+
+    static addProjectMenu() {
+        const addProject = document.getElementById("addProject");
+        addProject.addEventListener("click", () => {
+            display.addProjectMenu();
+        });
+    }
+
+    static addProjectSubmitChecker() {
+        const inputName = document.getElementById("formProjectName");
+        const submit = document.getElementById("addProjectBtn");
+        inputName.addEventListener("input", () => {
+            if (inputName.value.length === 0) {
+                submit.disabled = true;
+            } else {
+                submit.disabled = false;
+            }
+        });
+    }
+
+    static addProjectSubmit() {
+        const submit = document.getElementById("addProjectBtn");
+        submit.addEventListener("click", () => {
+            if (submit.disabled === false) {
+                app.addProject(display.addProjectSubmit());
+                display.renderProject(app.allProjects[app.allProjects.length - 1]);
+                console.log(app);
+                // Add listener for project options button
+            }
+        });
+    }
+
+    static addProjectCancelBtn() {
+        const addProjectCancel = document.getElementById("addProjectCancel");
+        addProjectCancel.addEventListener("click", () => {
+            display.addProjectClear();
+        });
+    }
+
+    // Listener for project options menu
+    // Listener for editing project
+    // Listener for deleting project
 
     // Todo Listeners
     static todoListeners() {
@@ -30,7 +77,7 @@ class events {
         const addTask = document.getElementById("addTodo");
         addTask.addEventListener("click", () => {
             display.addTaskMenu();
-        })
+        });
     }
 
     static addTaskSubmitChecker() {
@@ -42,7 +89,7 @@ class events {
             } else {
                 submit.disabled = false;
             }
-        })
+        });
     }
 
     static addTaskSubmit() {
@@ -52,23 +99,23 @@ class events {
                 activeProject.addTodo(display.addTaskSubmit());
                 display.renderTodo(activeProject.projectTodos[activeProject.projectTodos.length - 1]);
                 console.log(activeProject);
-                this.delBtn();
+                this.delBtnListener();
             }
-        })
+        });
     }
 
     static addTaskCancelBtn() {
         const addTodoCancel = document.getElementById("addTodoCancel");
         addTodoCancel.addEventListener("click", () => {
             display.addTaskClear();
-        })
+        });
     }
 
     // Listener for view button
 
     // Listener for edit button
 
-    static delBtn() {
+    static delBtnListener() {
         const todoRow = document.querySelector(".addTask").previousElementSibling;
         const btn = todoRow.querySelector(".taskDelBtn");
         btn.addEventListener("click", () => {
@@ -94,22 +141,8 @@ window.onload = () => {
     });
     activeProject.projectTodos.forEach(todo => {
         display.renderTodo(todo);
-        events.delBtn();
+        events.delBtnListener();
     });
     display.renderActiveProject(activeProject.title);
     events.pageLoad();
 }
-
-
-// Create project function
-    // Pushes a new project to the allProjects array
-
-// Project function to toggle active status
-
-// Delete project
-
-// Todo function to toggle complete status
-
-// Function to view todo details
-
-// Function to edit todo details

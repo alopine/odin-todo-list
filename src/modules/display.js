@@ -1,3 +1,4 @@
+import Project from "./project";
 import Todo from "./todo";
 
 export default class display {
@@ -24,13 +25,36 @@ export default class display {
     // Function to switch active project
         // Add active styling to active project
 
-    // Function for add project button
-        // Toggle project add form visibility
-        // Adds a form at bottom of project list prompting for name
-        // Cancel and add buttons below
+    static addProjectMenu() {
+        const addProjectBar = document.getElementById("addProject");
+        const addProjectMenu = document.querySelector(".addProjectMenuWrapper");
+        addProjectBar.classList.add("hidden");
+        addProjectMenu.classList.remove("hidden");
+    }
+
+    static addProjectSubmit() {
+        const projectName = document.getElementById("formProjectName").value;
+        this.addProjectClear();
+        return new Project(projectName);
+    }
+
+    static addProjectClear() {
+        const addProjectBar = document.getElementById("addProject");
+        const addProjectMenu = document.querySelector(".addProjectMenuWrapper");
+        const addProjectForm = document.getElementById("addProjectForm");
+        addProjectBar.classList.remove("hidden");
+        addProjectMenu.classList.add("hidden");
+        addProjectForm.reset();
+        const submit = document.getElementById("addProjectBtn");
+        submit.disabled = true;
+    }
+    
+    // Function for project options dropdown
+        // Edit button
+        // Delete button
 
     // Function to toggle edit project
-        // Brings up similar interface as add but with name prefilled
+        // Turns title span into text input field with original title placeholder and confirm/cancel buttons next to it
 
     // Function to delete project
 
@@ -62,7 +86,7 @@ export default class display {
     }
 
     static addTaskMenu() {
-        const addTaskBar = document.querySelector(".addTask");
+        const addTaskBar = document.getElementById("addTodo");
         const addTaskMenu = document.querySelector(".addTaskMenuWrapper");
         addTaskBar.classList.add("hidden");
         addTaskMenu.classList.remove("hidden");
@@ -88,10 +112,10 @@ export default class display {
         submit.disabled = true;
     }
 
-    // Function to bring up todo details view
+    // Function to bring up view todo details modal
 
     // Function to toggle edit todo
-        // Brings up similar interface as add but with details prefilled
+        // Brings up modal with inputs, similar to add todo form
 
     static deleteTodo(id) {
         document.getElementById(id).remove();

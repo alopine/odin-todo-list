@@ -97,7 +97,6 @@ class events {
         submit.addEventListener("click", () => {
             activeProject.addTodo(display.addTaskSubmit());
             display.renderTodo(activeProject.projectTodos[activeProject.projectTodos.length - 1]);
-            console.log(activeProject);
             this.delBtnListener();
         });
     }
@@ -137,7 +136,6 @@ class events {
             let id = btn.parentNode.parentNode.id;
             activeProject.deleteTodo(id);
             display.deleteTodo(id);
-            console.log(activeProject);
         });
     }
 }

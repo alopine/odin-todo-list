@@ -71,7 +71,7 @@ body {
     border-radius: 5px;
 }
 
-#addProject:hover, .projectsEntry:hover, .todoRight>button:hover {
+#addProject:hover, .projectsEntry:hover, .todoRight>button:not([disabled]):hover, .activeProject {
     background-color: var(--hover-color);
 }
 
@@ -161,6 +161,15 @@ main {
     border-radius: 50%;
     margin-right: 0.5rem;
     background-color: transparent;
+}
+
+.complete {
+    color: var(--outline-color);
+    text-decoration: line-through;
+}
+
+.complete .taskCheckbox {
+    background-color: var(--outline-color);
 }
 
  .newProjectBtn, .addTaskBtn { 

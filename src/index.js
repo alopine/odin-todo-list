@@ -21,7 +21,8 @@ class events {
         this.addProjectCancelBtn();
     }
 
-    // Listener for switching active project -- sidebar
+    // Listener for switching active project
+    
 
     static addProjectMenu() {
         const addProject = document.getElementById("addProject");
@@ -45,12 +46,10 @@ class events {
     static addProjectSubmit() {
         const submit = document.getElementById("addProjectBtn");
         submit.addEventListener("click", () => {
-            if (submit.disabled === false) {
-                app.addProject(display.addProjectSubmit());
+            app.addProject(display.addProjectSubmit());
                 display.renderProject(app.allProjects[app.allProjects.length - 1]);
                 console.log(app);
                 // Add listener for project options button
-            }
         });
     }
 
@@ -71,6 +70,7 @@ class events {
         this.addTaskSubmitChecker();
         this.addTaskSubmit();
         this.addTaskCancelBtn();
+        this.todoOptionsBtns();
     }
 
     static addTaskMenu() {
@@ -95,12 +95,10 @@ class events {
     static addTaskSubmit() {
         const submit = document.getElementById("addTodoBtn");
         submit.addEventListener("click", () => {
-            if (submit.disabled === false) {
-                activeProject.addTodo(display.addTaskSubmit());
-                display.renderTodo(activeProject.projectTodos[activeProject.projectTodos.length - 1]);
-                console.log(activeProject);
-                this.delBtnListener();
-            }
+            activeProject.addTodo(display.addTaskSubmit());
+            display.renderTodo(activeProject.projectTodos[activeProject.projectTodos.length - 1]);
+            console.log(activeProject);
+            this.delBtnListener();
         });
     }
 
@@ -108,6 +106,23 @@ class events {
         const addTodoCancel = document.getElementById("addTodoCancel");
         addTodoCancel.addEventListener("click", () => {
             display.addTaskClear();
+        });
+    }
+
+    static todoOptionsBtns() {
+        this.todoToggleListener();
+        this.delBtnListener();
+    }
+
+    // Listener for toggling complete status
+    static todoToggleListener() {
+        const todoRow = document.querySelector(".addTask").previousElementSibling;
+        const btn = todoRow.querySelector(".taskCheckbox");
+        btn.addEventListener("click", () => {
+            let id = btn.parentNode.parentNode.id;
+            display.toggleTodoStatus(id);
+            let task = activeProject.projectTodos.find((todo) => todo.id === id);
+            task.complete = !task.complete;
         });
     }
 
@@ -125,8 +140,6 @@ class events {
             console.log(activeProject);
         });
     }
-
-    // Listener for toggling complete status
 }
 
 // Temporary testing
@@ -141,7 +154,7 @@ window.onload = () => {
     });
     activeProject.projectTodos.forEach(todo => {
         display.renderTodo(todo);
-        events.delBtnListener();
+        events.todoOptionsBtns();
     });
     display.renderActiveProject(activeProject.title);
     events.pageLoad();

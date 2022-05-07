@@ -20,7 +20,7 @@ class events {
     static renderSidebar() {
         app.allProjects.forEach((project) => {
             display.renderProject(project);
-            events.switchActiveProject();
+            this.singleProjectListeners();
         });
     }
 
@@ -29,7 +29,7 @@ class events {
         display.renderActiveProject(activeProject);
         activeProject.projectTodos.forEach(todo => {
             display.renderTodo(todo);
-            events.todoOptionsBtns();
+            this.todoOptionsBtns();
         });
     }
 
@@ -41,18 +41,27 @@ class events {
         this.addProjectCancelBtn();
     }
 
-    // Listener for switching active project
-    static switchActiveProject() {
+    static singleProjectListeners() {
+        this.switchActiveProjectListener();
+        this.projectEditListener();
+        this.projectDeleteListener();
+    }
+
+    static switchActiveProjectListener() {
         const projectEntry = document.getElementById("addProject").previousElementSibling;
         projectEntry.addEventListener("click", () => {
             if (app.activeProjectID === projectEntry.id) {
                 return;
             } else {
-                app.activeProjectID = projectEntry.id;
-                activeProject = app.allProjects.find((project) => project.id === projectEntry.id);
-                this.renderMain();
+                this.switchActiveProject(projectEntry.id);
             }
         })
+    }
+
+    static switchActiveProject(id) {
+        app.activeProjectID = id;
+        activeProject = app.allProjects.find((project) => project.id === id);
+        this.renderMain();
     }
     
     static addProjectMenu() {
@@ -76,7 +85,7 @@ class events {
             app.addProject(display.addProjectSubmit());
                 display.renderProject(app.allProjects[app.allProjects.length - 1]);
                 console.log(app);
-                events.switchActiveProject();
+                this.singleProjectListeners();
         });
     }
 
@@ -87,8 +96,28 @@ class events {
         });
     }
 
-    // Listener for editing project
-    // Listener for deleting project
+    static projectEditListener() {
+        // TODO
+    }
+
+    static projectDeleteListener() {
+        const projectEntry = document.getElementById("addProject").previousElementSibling;
+        const id = projectEntry.id;
+        const btn = projectEntry.querySelector(".projectDelBtn");
+        btn.addEventListener("click", (event) => {
+            if (app.allProjects.length === 1) {
+                window.alert("You can't delete your last project!");
+            } else {
+                app.deleteProject(id);
+                display.deleteItem(id);
+            }
+            if (app.activeProjectID === id) {
+                activeProject = app.allProjects[0];
+                this.switchActiveProject(activeProject.id);
+            }
+        event.stopPropagation();
+        });
+    }
 
     // Todo Listeners
     static todoListeners() {
@@ -131,13 +160,13 @@ class events {
 
     static todoOptionsBtns() {
         this.todoToggleListener();
-        this.delBtnListener();
+        this.todoDeleteListener();
     }
 
     // Listener for toggling complete status
     static todoToggleListener() {
-        const todoRow = document.getElementById("addTodo").previousElementSibling;
-        const btn = todoRow.querySelector(".taskCheckbox");
+        const todoEntry = document.getElementById("addTodo").previousElementSibling;
+        const btn = todoEntry.querySelector(".taskCheckbox");
         btn.addEventListener("click", () => {
             let id = btn.parentNode.parentNode.id;
             display.toggleTodoStatus(id);
@@ -147,13 +176,13 @@ class events {
         
     }
 
-    // Listener for view button
+    
 
     // Listener for edit button
 
-    static delBtnListener() {
-        const todoRow = document.getElementById("addTodo").previousElementSibling;
-        const btn = todoRow.querySelector(".taskDelBtn");
+    static todoDeleteListener() {
+        const todoEntry = document.getElementById("addTodo").previousElementSibling;
+        const btn = todoEntry.querySelector(".taskDelBtn");
         btn.addEventListener("click", () => {
             let id = btn.parentNode.parentNode.id;
             activeProject.deleteTodo(id);

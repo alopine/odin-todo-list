@@ -20,7 +20,7 @@
                 <button class="newProjectBtn">+</button>
             </li>
             <li class="addProjectMenuWrapper hidden">
-                <form class="addForm addProjectMenu" id="addProjectForm">
+                <form onsubmit="return false;" class="addForm addProjectMenu" id="addProjectForm">
                     <input type="text" name="projectName" id="formProjectName" placeholder="Project name" autocomplete="off">
                 </form>
                 <div class="addFormBtns flex">
@@ -39,7 +39,7 @@
                     <span>Add task</span>
                 </li>
                 <li class="addTaskMenuWrapper hidden">
-                    <form class="addForm" id="addTodoForm">
+                    <form onsubmit="return false;" class="addForm" id="addTodoForm">
                         <input type="text" name="todoName" id="formTodoName" placeholder="Task name" autocomplete="off">
                         <textarea name="todoDesc" id="formTodoDesc" placeholder="Description"></textarea>
                         <input type="date" name="todoDueDate" id="formTodoDueDate">

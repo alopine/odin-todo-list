@@ -34,7 +34,7 @@ export default class App {
         }
     }
 
-    deleteProject(delProject) {
-        this.allProjects = this.allProjects.filter((project) => project.id !== delProject.id);
+    deleteProject(id) {
+        this.allProjects = this.allProjects.filter((project) => project.id !== id);
     }
 }

@@ -2,6 +2,11 @@ import Project from "./project";
 import Todo from "./todo";
 
 export default class display {
+    // General Functions
+    static deleteItem(id) {
+        document.getElementById(id).remove();
+    }
+
     // Project Functions
     static renderProject(project) {
         const projectsList = document.getElementById("projectsList");
@@ -11,19 +16,26 @@ export default class display {
         newNode.id = project.id;
         newNode.innerHTML = `
         <span>${project.title}</span>
-        <button class="projectMoreOptionsBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#808080" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-        </button>`
+        <div class="projectBtnsWrapper">
+            <button class="projectEditBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#808080" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            </button>
+            <button class="projectDelBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#808080" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+            </button>
+        </div>`
         projectsList.insertBefore(newNode, addProject);
     }
 
-    static renderActiveProject(title) {
+    static renderActiveProject(project) {
+        let prevActive = document.querySelector(".activeProject");
+        if (prevActive) {
+            prevActive.classList.remove("activeProject");
+        }
+        document.getElementById(project.id).classList.add("activeProject");
         const projectTitle = document.querySelector(".projectTitle");
-        projectTitle.innerText = title;
+        projectTitle.innerText = project.title;
     }
-
-    // Function to switch active project
-        // Add active styling to active project
 
     static addProjectMenu() {
         const addProjectBar = document.getElementById("addProject");
@@ -48,15 +60,18 @@ export default class display {
         const submit = document.getElementById("addProjectBtn");
         submit.disabled = true;
     }
-    
-    // Function for project options dropdown
-        // Edit button
-        // Delete button
 
     // Function to toggle edit project
         // Turns title span into text input field with original title placeholder and confirm/cancel buttons next to it
 
-    // Function to delete project
+    static clearActiveProjectDisplay() {
+        const projectTitle = document.querySelector(".projectTitle");
+        projectTitle.innerText = "";
+        const todos = document.querySelectorAll(".projectTodo");
+        todos.forEach((todo) => {
+            todo.remove();
+        });
+    }
 
     // Todo Functions
     static renderTodo(todo) {
@@ -65,6 +80,9 @@ export default class display {
         let newNode = document.createElement("li");
         newNode.classList.add("projectTodo", "flex");
         newNode.id = todo.id;
+        if (todo.complete) {
+            newNode.classList.add("complete");
+        }
         newNode.innerHTML = `
         <div class="todoLeft flex">
             <button class="taskCheckbox"> </button>
@@ -116,10 +134,6 @@ export default class display {
 
     // Function to toggle edit todo
         // Brings up modal with inputs, similar to add todo form
-
-    static deleteTodo(id) {
-        document.getElementById(id).remove();
-    }
 
     static toggleTodoStatus(id) {
         let todoItem = document.getElementById(id);

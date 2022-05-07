@@ -9,8 +9,28 @@ let activeProject = app.allProjects.find((project) => project.id === app.activeP
 
 class events {
     static pageLoad() {
+        this.renderSidebar();
+        this.renderMain();
         this.projectListeners();
         this.todoListeners();
+    }
+
+    // Render events
+
+    static renderSidebar() {
+        app.allProjects.forEach((project) => {
+            display.renderProject(project);
+            events.switchActiveProject();
+        });
+    }
+
+    static renderMain() {
+        display.clearActiveProjectDisplay();
+        display.renderActiveProject(activeProject);
+        activeProject.projectTodos.forEach(todo => {
+            display.renderTodo(todo);
+            events.todoOptionsBtns();
+        });
     }
 
     // Project Listeners
@@ -22,8 +42,19 @@ class events {
     }
 
     // Listener for switching active project
+    static switchActiveProject() {
+        const projectEntry = document.getElementById("addProject").previousElementSibling;
+        projectEntry.addEventListener("click", () => {
+            if (app.activeProjectID === projectEntry.id) {
+                return;
+            } else {
+                app.activeProjectID = projectEntry.id;
+                activeProject = app.allProjects.find((project) => project.id === projectEntry.id);
+                this.renderMain();
+            }
+        })
+    }
     
-
     static addProjectMenu() {
         const addProject = document.getElementById("addProject");
         addProject.addEventListener("click", () => {
@@ -35,11 +66,7 @@ class events {
         const inputName = document.getElementById("formProjectName");
         const submit = document.getElementById("addProjectBtn");
         inputName.addEventListener("input", () => {
-            if (inputName.value.length === 0) {
-                submit.disabled = true;
-            } else {
-                submit.disabled = false;
-            }
+            submit.disabled = !inputName.value.length;
         });
     }
 
@@ -49,7 +76,7 @@ class events {
             app.addProject(display.addProjectSubmit());
                 display.renderProject(app.allProjects[app.allProjects.length - 1]);
                 console.log(app);
-                // Add listener for project options button
+                events.switchActiveProject();
         });
     }
 
@@ -60,7 +87,6 @@ class events {
         });
     }
 
-    // Listener for project options menu
     // Listener for editing project
     // Listener for deleting project
 
@@ -83,11 +109,7 @@ class events {
         const inputName = document.getElementById("formTodoName");
         const submit = document.getElementById("addTodoBtn");
         inputName.addEventListener("input", () => {
-            if (inputName.value.length === 0) {
-                submit.disabled = true;
-            } else {
-                submit.disabled = false;
-            }
+            submit.disabled = !inputName.value.length;
         });
     }
 
@@ -130,12 +152,12 @@ class events {
     // Listener for edit button
 
     static delBtnListener() {
-        const todoRow = document.querySelector(".addTask").previousElementSibling;
+        const todoRow = document.getElementById("addTodo").previousElementSibling;
         const btn = todoRow.querySelector(".taskDelBtn");
         btn.addEventListener("click", () => {
             let id = btn.parentNode.parentNode.id;
             activeProject.deleteTodo(id);
-            display.deleteTodo(id);
+            display.deleteItem(id);
         });
     }
 }
@@ -146,13 +168,8 @@ window.onload = () => {
     activeProject.addTodo(new Todo("Test Todo 2", "Test description 2", "2022-04-30", "Low"));
     activeProject.addTodo(new Todo("Test Todo 3", "Test description 3", "2022-04-30", "Low"));
     app.addProject(new Project("Test Project 1"));
-    app.allProjects.forEach((project) => {
-        display.renderProject(project);
-    });
-    activeProject.projectTodos.forEach(todo => {
-        display.renderTodo(todo);
-        events.todoOptionsBtns();
-    });
-    display.renderActiveProject(activeProject.title);
+    app.allProjects[1].addTodo(new Todo("Test Todo 1", "Test description 1", "2022-05-01", "Low"));
+    app.allProjects[1].addTodo(new Todo("Test Todo 2", "Test description 2", "2022-05-01", "Low"));
+    app.allProjects[1].addTodo(new Todo("Test Todo 3", "Test description 3", "2022-05-01", "Low"));
     events.pageLoad();
 }

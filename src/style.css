@@ -71,7 +71,7 @@ body {
     border-radius: 5px;
 }
 
-#addProject:hover, .projectsEntry:hover, .todoRight>button:not([disabled]):hover, .activeProject {
+#addProject:hover, .projectsEntry:hover, .todoRight>button:hover, .activeProject {
     background-color: var(--hover-color);
 }
 

@@ -123,14 +123,10 @@ export default class display {
 
     static toggleTodoStatus(id) {
         let todoItem = document.getElementById(id);
-        let todoBtns = todoItem.querySelector(".todoRight").querySelectorAll("button");
         if (todoItem.classList.contains("complete")) {
             todoItem.classList.remove("complete");
         } else {
             todoItem.classList.add("complete");
         }
-        todoBtns.forEach((btn) => {
-            btn.disabled = !btn.disabled;
-        });
     }
 }

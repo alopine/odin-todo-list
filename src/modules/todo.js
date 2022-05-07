@@ -35,7 +35,7 @@ export default class Todo {
     }
 
     set description(arg) {
-        if (typeof arg === Boolean) {
+        if (arg) {
             this._description = arg;
         }
     }

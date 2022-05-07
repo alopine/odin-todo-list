@@ -70,7 +70,6 @@ class events {
         this.addTaskSubmitChecker();
         this.addTaskSubmit();
         this.addTaskCancelBtn();
-        this.todoOptionsBtns();
     }
 
     static addTaskMenu() {
@@ -97,7 +96,7 @@ class events {
         submit.addEventListener("click", () => {
             activeProject.addTodo(display.addTaskSubmit());
             display.renderTodo(activeProject.projectTodos[activeProject.projectTodos.length - 1]);
-            this.delBtnListener();
+            this.todoOptionsBtns();
         });
     }
 
@@ -115,7 +114,7 @@ class events {
 
     // Listener for toggling complete status
     static todoToggleListener() {
-        const todoRow = document.querySelector(".addTask").previousElementSibling;
+        const todoRow = document.getElementById("addTodo").previousElementSibling;
         const btn = todoRow.querySelector(".taskCheckbox");
         btn.addEventListener("click", () => {
             let id = btn.parentNode.parentNode.id;
@@ -123,6 +122,7 @@ class events {
             let task = activeProject.projectTodos.find((todo) => todo.id === id);
             task.complete = !task.complete;
         });
+        
     }
 
     // Listener for view button
@@ -145,7 +145,6 @@ window.onload = () => {
     activeProject.addTodo(new Todo("Test Todo 1", "Test description 1", "2022-04-30", "Low"));
     activeProject.addTodo(new Todo("Test Todo 2", "Test description 2", "2022-04-30", "Low"));
     activeProject.addTodo(new Todo("Test Todo 3", "Test description 3", "2022-04-30", "Low"));
-    console.log(activeProject);
     app.addProject(new Project("Test Project 1"));
     app.allProjects.forEach((project) => {
         display.renderProject(project);

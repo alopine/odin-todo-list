@@ -37,6 +37,12 @@ export default class display {
         projectTitle.innerText = project.title;
     }
 
+    static updateProjectName(project) {
+        const projectEntry = document.getElementById(project.id);
+        let title = projectEntry.querySelector("span");
+        title.innerText = project.title;
+    }
+
     static addProjectMenu() {
         const addProjectBar = document.getElementById("addProject");
         const addProjectMenu = document.querySelector(".addProjectMenuWrapper");
@@ -46,7 +52,6 @@ export default class display {
 
     static addProjectSubmit() {
         const projectName = document.getElementById("formProjectName").value;
-        this.addProjectClear();
         return new Project(projectName);
     }
 
@@ -61,8 +66,35 @@ export default class display {
         submit.disabled = true;
     }
 
-    // Function to toggle edit project
-        // Turns title span into text input field with original title placeholder and confirm/cancel buttons next to it
+    static editProjectDisplay(project) {
+        const projectEntry = document.getElementById(project.id);
+        projectEntry.classList.add("hidden");
+        const editField = document.createElement("li");
+        editField.classList.add("editProject");
+        editField.innerHTML = `
+            <div class="editProjectWrapper flex">
+                <input type="text" name="editProjectName" class="editProjectName" placeholder="Project name" value="${project.title}" autocomplete="off">
+                <button class="editProjectSubmit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="#299438" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </button>
+                <button class="editProjectCancel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="#DE4C4A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                </button>
+            </div>`;
+        projectEntry.after(editField);
+    }
+
+    static editProjectSubmit(project) {
+        const editProject = document.getElementById(project.id).nextElementSibling;
+        const inputName = editProject.querySelector(".editProjectName");
+        project.title = inputName.value;
+    }
+
+    static editProjectClear(id) {
+        const projectEntry = document.getElementById(id);
+        projectEntry.classList.remove("hidden");
+        projectEntry.nextElementSibling.remove();
+    }
 
     static clearActiveProjectDisplay() {
         const projectTitle = document.querySelector(".projectTitle");
@@ -115,7 +147,6 @@ export default class display {
         const todoDesc = document.getElementById("formTodoDesc").value;
         const todoDueDate = document.getElementById("formTodoDueDate").value;
         const todoPriority = document.getElementById("formTodoPriority").value;
-        this.addTodoClear();
         return new Todo(todoName, todoDesc, todoDueDate, todoPriority);
     }
 

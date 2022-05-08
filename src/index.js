@@ -42,8 +42,14 @@ class events {
 
     static singleProjectListeners() {
         this.switchActiveProjectListener();
-        this.projectEditListener();
+        this.editProjectDisplay();
         this.projectDeleteListener();
+    }
+
+    static editProjectListeners(id) {
+        this.editProjectSubmitChecker(id);
+        this.editProjectSubmit(id);
+        this.editProjectCancel(id);
     }
 
     static switchActiveProjectListener() {
@@ -83,7 +89,7 @@ class events {
         submit.addEventListener("click", () => {
             app.addProject(display.addProjectSubmit());
                 display.renderProject(app.allProjects[app.allProjects.length - 1]);
-                console.log(app);
+                display.addProjectClear();
                 this.singleProjectListeners();
         });
     }
@@ -95,8 +101,47 @@ class events {
         });
     }
 
-    static projectEditListener() {
-        // TODO
+    static editProjectDisplay() {
+        const projectEntry = document.getElementById("addProject").previousElementSibling;
+        const id = projectEntry.id;
+        const project = app.findProject(id);
+        const btn = projectEntry.querySelector(".projectEditBtn");
+        btn.addEventListener("click", (event) => {
+            display.editProjectDisplay(project);
+            this.editProjectListeners(id);
+            event.stopPropagation();
+        });
+    }
+
+    static editProjectSubmitChecker(id) {
+        const editProject = document.getElementById(id).nextElementSibling;
+        const inputName = editProject.querySelector(".editProjectName");
+        const submit = editProject.querySelector(".editProjectSubmit");
+        inputName.addEventListener("input", () => {
+            submit.disabled = !inputName.value.length;
+        });
+    }
+
+    static editProjectSubmit(id) {
+        const editProject = document.getElementById(id).nextElementSibling;
+        const project = app.findProject(id);
+        const btn = editProject.querySelector(".editProjectSubmit");
+        btn.addEventListener("click", () => {
+            display.editProjectSubmit(project);
+            display.editProjectClear(id);
+            display.updateProjectName(project);
+            if (id === app.activeProjectID) {
+                display.renderActiveProject(activeProject);
+            }
+        });
+    }
+
+    static editProjectCancel(id) {
+        const editProject = document.getElementById(id).nextElementSibling;
+        const btn = editProject.querySelector(".editProjectCancel");
+        btn.addEventListener("click", () => {
+            display.editProjectClear(id);
+        });
     }
 
     static projectDeleteListener() {
@@ -114,7 +159,7 @@ class events {
                 activeProject = app.allProjects[0];
                 this.switchActiveProject(activeProject.id);
             }
-        event.stopPropagation();
+            event.stopPropagation();
         });
     }
 
@@ -145,6 +190,7 @@ class events {
         const submit = document.getElementById("addTodoBtn");
         submit.addEventListener("click", () => {
             activeProject.addTodo(display.addTodoSubmit());
+            display.addTodoClear();
             display.renderTodo(activeProject.projectTodos[activeProject.projectTodos.length - 1]);
             this.todoOptionsBtns();
         });

@@ -6,6 +6,7 @@
     --hover-color: #363636;
     --outline-color: #808080;
     --main-bg-color: #1F1F1F;
+    --sidebar-color: #282828;
 }
 
 
@@ -41,7 +42,7 @@ body {
 /* || Sidebar */
 
 .sidebar {
-    background-color: #282828;
+    background-color: var(--sidebar-color);
     padding: 2rem 2rem 0;
 }
 
@@ -62,16 +63,16 @@ body {
     margin-right: 0.5rem;
 }
 
-.projectsEntry, #addProject {
+.projectsEntry, #addProject, .editProjectWrapper {
     padding: 0.5rem;
     height: 2rem;
 }
 
-.newProject, .projectsEntry, #addProject {
+.newProject, .projectsEntry, #addProject, .editProjectWrapper {
     border-radius: 5px;
 }
 
-#addProject:hover, .projectsEntry:hover, .todoRight>button:hover, .activeProject {
+#addProject:hover, .projectsEntry:hover, .todoRight>button:hover, .activeProject, .editProjectWrapper {
     background-color: var(--hover-color);
 }
 
@@ -85,9 +86,26 @@ body {
 
 /* || Add Project Menu */
 
-#formProjectName {
-    background-color: #282828;
+.sidebar form>input, .editProjectWrapper>input {
     height: 1rem;
+}
+
+#formProjectName {
+    background-color: var(--sidebar-color);
+}
+
+/* || Edit Project */
+.editProject .editProjectWrapper {
+    column-gap: 1rem;
+    align-items: center;
+}
+
+.editProjectName {
+    background-color: var(--hover-color);
+}
+
+.editProjectWrapper button:disabled svg {
+    stroke: var(--outline-color);
 }
 
 /* || Main */
@@ -124,11 +142,11 @@ main {
     padding: 0.5rem 0.5rem 0.5rem 0;
 }
 
-.projectTodo, .projectsEntry, #addProject {
+.projectTodo, .projectsEntry, #addProject, .editProjectWrapper {
     justify-content: space-between;
 }
 
-.projectTodo>div, .projectsEntry {
+.projectTodo>div, .projectsEntry, .editProjectWrapper {
     align-items: center;
 }
 
@@ -147,7 +165,7 @@ main {
     color: var(--outline-color);
 }
 
-.todoRight>button, .projectBtnsWrapper>button {
+.todoRight>button, .projectBtnsWrapper>button, .editProject button {
     border: 0;
     border-radius: 5px;
     background-color: transparent;
@@ -176,7 +194,7 @@ main {
     line-height: 1rem;
 }
 
-#addProject span, .newProjectBtn, #addTodo span {
+#addProject span, .newProjectBtn, #addTodo span, .editProjectName {
     color: var(--outline-color);
 }
 
@@ -203,14 +221,14 @@ main {
     padding: 0.5rem;
 }
 
-#formProjectName, #formTodoName, #formTodoDueDate, #formTodoDesc, #formTodoPriority {
+input, select, textarea {
     font-size: 1em;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--main-text-color);
     outline: none;
 }
 
-#formTodoName, #formTodoDueDate, #formTodoDesc, #formTodoPriority {
+main form>input, main form>select, main form>textarea {
     background-color: var(--main-bg-color);
 }
 
@@ -223,7 +241,7 @@ main {
     color-scheme: dark;
 }
 
-#formProjectName, #formTodoName, #formTodoDesc {
+input[type="text"], textarea {
     width: 100%;
 }
 

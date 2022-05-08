@@ -21,7 +21,7 @@
 body {
     height: 100vh;
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: minmax(min-content, 2fr) 5fr;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--main-text-color);
 }
@@ -120,7 +120,7 @@ main {
     border: none;
 }
 
-.projectTodo, .addTask {
+.projectTodo, #addTodo {
     padding: 0.5rem 0.5rem 0.5rem 0;
 }
 
@@ -176,7 +176,7 @@ main {
     line-height: 1rem;
 }
 
-#addProject span, .newProjectBtn, .addTask span {
+#addProject span, .newProjectBtn, #addTodo span {
     color: var(--outline-color);
 }
 
@@ -190,7 +190,7 @@ main {
 }
 
 /* Add Task Menu */
-.addProjectMenuWrapper, .addTaskMenuWrapper {
+.addProjectMenuWrapper, .addTodoMenuWrapper {
     padding-top: 0.5rem;
 }
 

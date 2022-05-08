@@ -12,7 +12,7 @@ class events {
         this.renderSidebar();
         this.renderMain();
         this.projectListeners();
-        this.todoListeners();
+        this.addTodoListeners();
     }
 
     // Render events
@@ -120,21 +120,21 @@ class events {
     }
 
     // Todo Listeners
-    static todoListeners() {
-        this.addTaskMenu();
-        this.addTaskSubmitChecker();
-        this.addTaskSubmit();
-        this.addTaskCancelBtn();
+    static addTodoListeners() {
+        this.addTodoMenu();
+        this.addTodoSubmitChecker();
+        this.addTodoSubmit();
+        this.addTodoCancelBtn();
     }
 
-    static addTaskMenu() {
-        const addTask = document.getElementById("addTodo");
-        addTask.addEventListener("click", () => {
-            display.addTaskMenu();
+    static addTodoMenu() {
+        const addTodo = document.getElementById("addTodo");
+        addTodo.addEventListener("click", () => {
+            display.addTodoMenu();
         });
     }
 
-    static addTaskSubmitChecker() {
+    static addTodoSubmitChecker() {
         const inputName = document.getElementById("formTodoName");
         const submit = document.getElementById("addTodoBtn");
         inputName.addEventListener("input", () => {
@@ -142,28 +142,28 @@ class events {
         });
     }
 
-    static addTaskSubmit() {
+    static addTodoSubmit() {
         const submit = document.getElementById("addTodoBtn");
         submit.addEventListener("click", () => {
-            activeProject.addTodo(display.addTaskSubmit());
+            activeProject.addTodo(display.addTodoSubmit());
             display.renderTodo(activeProject.projectTodos[activeProject.projectTodos.length - 1]);
             this.todoOptionsBtns();
         });
     }
 
-    static addTaskCancelBtn() {
+    static addTodoCancelBtn() {
         const addTodoCancel = document.getElementById("addTodoCancel");
         addTodoCancel.addEventListener("click", () => {
-            display.addTaskClear();
+            display.addTodoClear();
         });
     }
 
     static todoOptionsBtns() {
         this.todoToggleListener();
+        this.todoEditListener();
         this.todoDeleteListener();
     }
 
-    // Listener for toggling complete status
     static todoToggleListener() {
         const todoEntry = document.getElementById("addTodo").previousElementSibling;
         const btn = todoEntry.querySelector(".taskCheckbox");
@@ -176,9 +176,9 @@ class events {
         
     }
 
-    
-
-    // Listener for edit button
+    static todoEditListener() {
+        // TODO
+    }
 
     static todoDeleteListener() {
         const todoEntry = document.getElementById("addTodo").previousElementSibling;

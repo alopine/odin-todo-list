@@ -48,4 +48,10 @@ export default class Project {
     deleteTodo(delTodoID) {
         this.projectTodos = this.projectTodos.filter((todo) => todo.id !== delTodoID);
     }
+
+    findTodo(id) {
+        if (id) {
+            return this.projectTodos.find((todo) => todo.id === id);
+        }
+    }
 }

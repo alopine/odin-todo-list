@@ -5,18 +5,17 @@ import Todo from './modules/todo';
 import display from './modules/display';
 
 let app = new App();
-let activeProject = app.allProjects.find((project) => project.id === app.activeProjectID);
+let activeProject = app.findProject(app.activeProjectID);
 
 class events {
     static pageLoad() {
         this.renderSidebar();
         this.renderMain();
-        this.projectListeners();
+        this.addProjectListeners();
         this.addTodoListeners();
     }
 
     // Render events
-
     static renderSidebar() {
         app.allProjects.forEach((project) => {
             display.renderProject(project);
@@ -34,7 +33,7 @@ class events {
     }
 
     // Project Listeners
-    static projectListeners() {
+    static addProjectListeners() {
         this.addProjectMenu();
         this.addProjectSubmitChecker();
         this.addProjectSubmit();
@@ -60,7 +59,7 @@ class events {
 
     static switchActiveProject(id) {
         app.activeProjectID = id;
-        activeProject = app.allProjects.find((project) => project.id === id);
+        activeProject = app.findProject(id);
         this.renderMain();
     }
     
@@ -160,6 +159,7 @@ class events {
 
     static todoOptionsBtns() {
         this.todoToggleListener();
+        this.todoViewListener();
         this.todoEditListener();
         this.todoDeleteListener();
     }
@@ -170,10 +170,15 @@ class events {
         btn.addEventListener("click", () => {
             let id = btn.parentNode.parentNode.id;
             display.toggleTodoStatus(id);
-            let task = activeProject.projectTodos.find((todo) => todo.id === id);
+            let task = activeProject.findTodo(id);
             task.complete = !task.complete;
+            console.log(task.complete);
         });
         
+    }
+
+    static todoViewListener() {
+        // TODO
     }
 
     static todoEditListener() {

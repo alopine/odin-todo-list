@@ -26,6 +26,7 @@ export default class App {
         }
     }
 
+
     addProject(newProject) {
         if (this.allProjects.find((project) => project.id === newProject.id)) {
             return;
@@ -36,5 +37,11 @@ export default class App {
 
     deleteProject(id) {
         this.allProjects = this.allProjects.filter((project) => project.id !== id);
+    }
+
+    findProject(id) {
+        if (id) {
+            return this.allProjects.find((project) => project.id === id);
+        }
     }
 }

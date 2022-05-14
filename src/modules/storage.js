@@ -21,10 +21,8 @@ export default class storage {
                 tempTodo.complete = todo._complete;
                 tempTodo.id = todo._id;
                 tempProject.projectTodos.push(tempTodo);
-                console.log(tempTodo);
             });
             tempApp.allProjects.push(tempProject);
-            console.log(tempProject);
         });
         tempApp.activeProject = tempApp.findProject(app._activeProject._id);
         return tempApp;

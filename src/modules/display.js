@@ -161,7 +161,36 @@ export default class display {
         submit.disabled = true;
     }
 
-    // Function to bring up view todo details modal
+    static showTodoDetails(todo, activeProject) {
+        const modal = document.createElement("div");
+        modal.classList.add("modal", "flex");
+        modal.innerHTML = `
+        <div class="modalContent flex flexColumn">
+            <div class="modalHeader flex">
+                <div class="modalProjectTitle">${activeProject.title}</div>
+                <button class="modalCloseBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#808080" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modalTodoTitle">
+                ${todo.title}
+            </div>
+            <div class="modalTodoDescription">
+                ${todo.description}
+            </div>
+            <div class="modalTodoInfo flex">
+                <div>${todo.dueDate}</div>
+                <div>${todo.priority}</div>
+                <div>${todo.complete ? "Completed" : "Not Completed"}</div>
+            </div>
+        </div>`
+        document.body.prepend(modal);
+    }
+
+    static closeTodoDetails() {
+        const modal = document.querySelector(".modal");
+        modal.remove();
+    }
 
     // Function to toggle edit todo
         // Brings up modal with inputs, similar to add todo form

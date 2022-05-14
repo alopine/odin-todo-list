@@ -25,8 +25,8 @@ class events {
 
     static renderMain() {
         display.clearActiveProjectDisplay();
-        display.renderActiveProject(activeProject);
-        activeProject.projectTodos.forEach(todo => {
+        display.renderActiveProject(app.activeProject);
+        app.activeProject.projectTodos.forEach(todo => {
             display.renderTodo(todo);
             this.todoOptionsBtns();
         });
@@ -55,7 +55,7 @@ class events {
     static switchActiveProjectListener() {
         const projectEntry = document.getElementById("addProject").previousElementSibling;
         projectEntry.addEventListener("click", () => {
-            if (app.activeProjectID === projectEntry.id) {
+            if (app.activeProject.id === projectEntry.id) {
                 return;
             } else {
                 this.switchActiveProject(projectEntry.id);
@@ -64,8 +64,7 @@ class events {
     }
 
     static switchActiveProject(id) {
-        app.activeProjectID = id;
-        activeProject = app.findProject(id);
+        app.activeProject = app.findProject(id);
         this.renderMain();
     }
     
@@ -130,8 +129,8 @@ class events {
             display.editProjectSubmit(project);
             display.editProjectClear(id);
             display.updateProjectName(project);
-            if (id === app.activeProjectID) {
-                display.renderActiveProject(activeProject);
+            if (id === app.activeProject.id) {
+                display.renderActiveProject(app.activeProject);
             }
         });
     }
@@ -155,9 +154,9 @@ class events {
                 app.deleteProject(id);
                 display.deleteItem(id);
             }
-            if (app.activeProjectID === id) {
-                activeProject = app.allProjects[0];
-                this.switchActiveProject(activeProject.id);
+            if (app.activeProject.id === id) {
+                app.activeProject = app.allProjects[0];
+                this.switchActiveProject(app.activeProject.id);
             }
             event.stopPropagation();
         });
@@ -189,9 +188,9 @@ class events {
     static addTodoSubmit() {
         const submit = document.getElementById("addTodoBtn");
         submit.addEventListener("click", () => {
-            activeProject.addTodo(display.addTodoSubmit());
+            app.activeProject.addTodo(display.addTodoSubmit());
             display.addTodoClear();
-            display.renderTodo(activeProject.projectTodos[activeProject.projectTodos.length - 1]);
+            display.renderTodo(app.activeProject.projectTodos[app.activeProject.projectTodos.length - 1]);
             this.todoOptionsBtns();
         });
     }
@@ -204,39 +203,49 @@ class events {
     }
 
     static todoOptionsBtns() {
-        this.todoToggleListener();
-        this.todoViewListener();
-        this.todoEditListener();
-        this.todoDeleteListener();
+        const todoEntry = document.getElementById("addTodo").previousElementSibling;
+        this.todoToggleListener(todoEntry);
+        this.todoViewListener(todoEntry);
+        this.todoEditListener(todoEntry);
+        this.todoDeleteListener(todoEntry);
     }
 
-    static todoToggleListener() {
-        const todoEntry = document.getElementById("addTodo").previousElementSibling;
+    static todoToggleListener(todoEntry) {
         const btn = todoEntry.querySelector(".taskCheckbox");
         btn.addEventListener("click", () => {
             let id = btn.parentNode.parentNode.id;
             display.toggleTodoStatus(id);
-            let task = activeProject.findTodo(id);
+            let task = app.activeProject.findTodo(id);
             task.complete = !task.complete;
-            console.log(task.complete);
         });
         
     }
 
-    static todoViewListener() {
+    static todoViewListener(todoEntry) {
+        const btn = todoEntry.querySelector(".taskViewBtn");
+        btn.addEventListener("click", () => {
+            const todo = app.activeProject.findTodo(btn.parentNode.parentNode.id);
+            display.showTodoDetails(todo, app.activeProject);
+            this.todoViewCloseListener();
+        });
+    }
+
+    static todoViewCloseListener() {
+        const closeBtn = document.querySelector(".modalCloseBtn");
+        closeBtn.addEventListener("click", () => {
+            display.closeTodoDetails();
+        });
+    }
+
+    static todoEditListener(todoEntry) {
         // TODO
     }
 
-    static todoEditListener() {
-        // TODO
-    }
-
-    static todoDeleteListener() {
-        const todoEntry = document.getElementById("addTodo").previousElementSibling;
+    static todoDeleteListener(todoEntry) {
         const btn = todoEntry.querySelector(".taskDelBtn");
         btn.addEventListener("click", () => {
             let id = btn.parentNode.parentNode.id;
-            activeProject.deleteTodo(id);
+            app.activeProject.deleteTodo(id);
             display.deleteItem(id);
         });
     }
@@ -244,9 +253,9 @@ class events {
 
 // Temporary testing
 window.onload = () => {
-    activeProject.addTodo(new Todo("Test Todo 1", "Test description 1", "2022-04-30", "Low"));
-    activeProject.addTodo(new Todo("Test Todo 2", "Test description 2", "2022-04-30", "Low"));
-    activeProject.addTodo(new Todo("Test Todo 3", "Test description 3", "2022-04-30", "Low"));
+    app.activeProject.addTodo(new Todo("Test Todo 1", "Test description 1", "2022-04-30", "Low"));
+    app.activeProject.addTodo(new Todo("Test Todo 2", "Test description 2", "2022-04-30", "Low"));
+    app.activeProject.addTodo(new Todo("Test Todo 3", "Test description 3", "2022-04-30", "Low"));
     app.addProject(new Project("Test Project 1"));
     app.allProjects[1].addTodo(new Todo("Test Todo 1", "Test description 1", "2022-05-01", "Low"));
     app.allProjects[1].addTodo(new Todo("Test Todo 2", "Test description 2", "2022-05-01", "Low"));

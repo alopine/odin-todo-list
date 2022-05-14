@@ -3,7 +3,7 @@ import Project from "./project";
 export default class App {
     constructor() {
         this._allProjects = [new Project("Inbox")];
-        this._activeProjectID = this.allProjects[0].id;
+        this._activeProject = this.allProjects[0];
     }
 
     get allProjects() {
@@ -16,16 +16,15 @@ export default class App {
         }
     }
 
-    get activeProjectID() {
-        return this._activeProjectID;
+    get activeProject() {
+        return this._activeProject;
     }
 
-    set activeProjectID(arg) {
+    set activeProject(arg) {
         if (arg) {
-            this._activeProjectID = arg;
+            this._activeProject = arg;
         }
     }
-
 
     addProject(newProject) {
         if (this.allProjects.find((project) => project.id === newProject.id)) {

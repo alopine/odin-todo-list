@@ -252,7 +252,7 @@ form input[type="text"] {
 
 form textarea {
     resize: none;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-right: 1rem;
 }
 
@@ -338,7 +338,7 @@ form textarea {
 
 .modalTodoDescription {
     max-height: 25vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .modalTodoInfo {

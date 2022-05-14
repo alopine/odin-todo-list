@@ -115,6 +115,9 @@ export default class display {
         if (todo.complete) {
             newNode.classList.add("complete");
         }
+        if (todo.priority !== "None") {
+            newNode.classList.add(todo.priority.toLowerCase());
+        }
         newNode.innerHTML = `
         <div class="todoLeft flex">
             <button class="taskCheckbox"> </button>
@@ -167,7 +170,7 @@ export default class display {
         modal.innerHTML = `
         <div class="modalContent flex flexColumn">
             <div class="modalHeader flex">
-                <div class="modalProjectTitle">${activeProject.title}</div>
+                <div class="modalTitle">${activeProject.title}</div>
                 <button class="modalCloseBtn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#808080" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -187,14 +190,68 @@ export default class display {
         document.body.prepend(modal);
     }
 
-    static closeTodoDetails() {
+    static closeTodoModal() {
         const modal = document.querySelector(".modal");
         modal.remove();
     }
 
-    // Function to toggle edit todo
-        // Brings up modal with inputs, similar to add todo form
+    static editTodoMenu(todo) {
+        const modal = document.createElement("div");
+        modal.classList.add("modal", "flex");
+        modal.innerHTML = `
+        <div class="modalContent flex flexColumn">
+            <div class="modalHeader flex">
+                <div class="modalTitle">Edit task</div>
+                <button class="modalCloseBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#808080" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <form onsubmit="return false;" class="addForm" id="editTodoForm">
+                <input type="text" name="todoName" id="editTodoName" placeholder="Task name" value="${todo.title}" autocomplete="off">
+                <textarea name="todoDesc" id="editTodoDesc" placeholder="Description">${todo.description}</textarea>
+                <input type="date" name="todoDueDate" id="editTodoDueDate" value="${todo.dueDate}">
+                <select name="todoPriority" id="editTodoPriority">
+                    ${todo.priority === "None" ? `<option value="None" selected>None</option>` : `<option value="None">None</option>`}
+                    ${todo.priority === "Low" ? `<option value="Low" selected>Low</option>` : `<option value="Low">Low</option>`}
+                    ${todo.priority === "Medium" ? `<option value="Medium" selected>Medium</option>` : `<option value="Medium">Medium</option>`}
+                    ${todo.priority === "High" ? `<option value="High" selected>High</option>` : `<option value="High">High</option>`}
+                </select>
+            </form>
+            <div class="addFormBtns flex">
+                <button class="addFormMainBtn" id="editTodoBtn">Save</button>
+                <button class="addFormCancelBtn" id="editTodoCancel">Cancel</button>
+            </div>
+        </div>`
+        document.body.prepend(modal);
+    }
 
+    static editTodoSubmit(todo) {
+        todo.title = document.getElementById("editTodoName").value;
+        todo.description = document.getElementById("editTodoDesc").value;
+        todo.dueDate = document.getElementById("editTodoDueDate").value;
+        todo.priority = document.getElementById("editTodoPriority").value;
+    }
+
+    static updateTodo(todo) {
+        let todoEntry = document.getElementById(todo.id);
+        // Re-render todo priority
+        const priorities = ["low", "medium", "high"];
+        priorities.forEach((priority) => {
+            if (todoEntry.classList.contains(priority)) {
+                todoEntry.classList.remove(priority);
+            }
+        });
+        if (todo.priority !== "None") {
+            todoEntry.classList.add(todo.priority.toLowerCase());
+        }
+        // Re-render todo title
+        let todoName = todoEntry.querySelector(".todoLeft").querySelector("span");
+        todoName.innerText = todo.title;
+        // Re-render todo due date
+        let todoDueDate = todoEntry.querySelector(".taskDueDate");
+        todoDueDate.innerText = todo.dueDate;
+    }
+    
     static toggleTodoStatus(id) {
         let todoItem = document.getElementById(id);
         if (todoItem.classList.contains("complete")) {

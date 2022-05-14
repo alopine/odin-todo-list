@@ -43,7 +43,7 @@ class events {
     static singleProjectListeners() {
         this.switchActiveProjectListener();
         this.editProjectDisplay();
-        this.projectDeleteListener();
+        this.deleteProject();
     }
 
     static editProjectListeners(id) {
@@ -143,7 +143,7 @@ class events {
         });
     }
 
-    static projectDeleteListener() {
+    static deleteProject() {
         const projectEntry = document.getElementById("addProject").previousElementSibling;
         const id = projectEntry.id;
         const btn = projectEntry.querySelector(".projectDelBtn");
@@ -204,13 +204,13 @@ class events {
 
     static todoOptionsBtns() {
         const todoEntry = document.getElementById("addTodo").previousElementSibling;
-        this.todoToggleListener(todoEntry);
-        this.todoViewListener(todoEntry);
-        this.todoEditListener(todoEntry);
-        this.todoDeleteListener(todoEntry);
+        this.toggleTodoStatus(todoEntry);
+        this.viewTodo(todoEntry);
+        this.editTodo(todoEntry);
+        this.deleteTodo(todoEntry);
     }
 
-    static todoToggleListener(todoEntry) {
+    static toggleTodoStatus(todoEntry) {
         const btn = todoEntry.querySelector(".taskCheckbox");
         btn.addEventListener("click", () => {
             let id = btn.parentNode.parentNode.id;
@@ -221,27 +221,63 @@ class events {
         
     }
 
-    static todoViewListener(todoEntry) {
+    static viewTodo(todoEntry) {
         const btn = todoEntry.querySelector(".taskViewBtn");
         btn.addEventListener("click", () => {
             const todo = app.activeProject.findTodo(btn.parentNode.parentNode.id);
             display.showTodoDetails(todo, app.activeProject);
-            this.todoViewCloseListener();
+            this.todoModalCloseListener();
         });
     }
 
-    static todoViewCloseListener() {
+    static todoModalCloseListener() {
         const closeBtn = document.querySelector(".modalCloseBtn");
         closeBtn.addEventListener("click", () => {
-            display.closeTodoDetails();
+            display.closeTodoModal();
         });
     }
 
-    static todoEditListener(todoEntry) {
-        // TODO
+    static editTodo(todoEntry) {
+        const btn = todoEntry.querySelector(".taskEditBtn");
+        btn.addEventListener("click", () => {
+            const todo = app.activeProject.findTodo(btn.parentNode.parentNode.id);
+            display.editTodoMenu(todo);
+            this.editTodoListeners(todo);
+        });
     }
 
-    static todoDeleteListener(todoEntry) {
+    static editTodoListeners(todo) {
+        this.todoModalCloseListener();
+        this.editTodoSubmit(todo);
+        this.editTodoSubmitChecker();
+        this.editTodoCancel();
+    }
+
+    static editTodoSubmit(todo) {
+        const submit = document.getElementById("editTodoBtn");
+        submit.addEventListener("click", () => {
+            display.editTodoSubmit(todo)
+            display.closeTodoModal();
+            display.updateTodo(todo);
+        });
+    }
+
+    static editTodoSubmitChecker() {
+        const inputName = document.getElementById("editTodoName");
+        const submit = document.getElementById("editTodoBtn");
+        inputName.addEventListener("input", () => {
+            submit.disabled = !inputName.value.length;
+        });
+    }
+    
+    static editTodoCancel() {
+        const closeBtn = document.getElementById("editTodoCancel");
+        closeBtn.addEventListener("click", () => {
+            display.closeTodoModal();
+        });
+    }
+
+    static deleteTodo(todoEntry) {
         const btn = todoEntry.querySelector(".taskDelBtn");
         btn.addEventListener("click", () => {
             let id = btn.parentNode.parentNode.id;
@@ -254,8 +290,8 @@ class events {
 // Temporary testing
 window.onload = () => {
     app.activeProject.addTodo(new Todo("Test Todo 1", "Test description 1", "2022-04-30", "Low"));
-    app.activeProject.addTodo(new Todo("Test Todo 2", "Test description 2", "2022-04-30", "Low"));
-    app.activeProject.addTodo(new Todo("Test Todo 3", "Test description 3", "2022-04-30", "Low"));
+    app.activeProject.addTodo(new Todo("Test Todo 2", "Test description 2", "2022-04-30", "Medium"));
+    app.activeProject.addTodo(new Todo("Test Todo 3", "Test description 3", "2022-04-30", "High"));
     app.addProject(new Project("Test Project 1"));
     app.allProjects[1].addTodo(new Todo("Test Todo 1", "Test description 1", "2022-05-01", "Low"));
     app.allProjects[1].addTodo(new Todo("Test Todo 2", "Test description 2", "2022-05-01", "Low"));

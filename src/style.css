@@ -7,6 +7,9 @@
     --outline-color: #808080;
     --main-bg-color: #1F1F1F;
     --sidebar-color: #282828;
+    --low-priority-color: #5297FF;
+    --medium-priority-color: #FF9A14;
+    --high-priority-color: #FF7066;
 }
 
 
@@ -135,11 +138,11 @@ main {
 }
 
 .todosList>li:first-child {
-    border: none;
+    border-top: none;
 }
 
 .projectTodo, #addTodo {
-    padding: 0.5rem 0.5rem 0.5rem 0;
+    padding: 0.5rem;
 }
 
 .projectTodo, .projectsEntry, #addProject, .editProjectWrapper {
@@ -207,16 +210,13 @@ main {
     background-color: var(--highlight-color);
 }
 
-/* Add Task Menu */
+/* || Add Task Menu */
 .addProjectMenuWrapper, .addTodoMenuWrapper {
     padding-top: 0.5rem;
 }
 
-.addForm, #formTodoDueDate, #formTodoPriority {
+.addForm, form input[type="date"], form select {
     border: 1px solid var(--hover-color);
-}
-
-.addForm, #formTodoDueDate, #formTodoPriority {
     border-radius: 10px;
     padding: 0.5rem;
 }
@@ -232,7 +232,7 @@ main form>input, main form>select, main form>textarea {
     background-color: var(--main-bg-color);
 }
 
-#formTodoDueDate, #formTodoPriority {
+form input[type="date"], form select {
     border-radius: 5px;
     padding: 0.25rem;
 }
@@ -245,12 +245,12 @@ input[type="text"], textarea {
     width: 100%;
 }
 
-#formTodoName {
+form input[type="text"] {
     height: 1rem;
     margin-bottom: 0.5rem;
 }
 
-#formTodoDesc {
+form textarea {
     resize: none;
     overflow-y: scroll;
     padding-right: 1rem;
@@ -291,9 +291,6 @@ input[type="text"], textarea {
 }
 
 /* || Modal */
-
-
-
 .modal {
     position: fixed;
     z-index: 1;
@@ -322,7 +319,7 @@ input[type="text"], textarea {
     justify-content: space-between;
 }
 
-.modalProjectTitle {
+.modalTitle {
     font-size: 1.1rem;
 }
 
@@ -352,4 +349,21 @@ input[type="text"], textarea {
     border: 1px solid var(--outline-color);
     border-radius: 5px;
     padding: 0.3rem 0.6rem;
+}
+
+.modal form>input, .modal form>select, .modal form>textarea {
+    background-color: var(--sidebar-color);
+}
+
+/* || Todo Priority */
+.low {
+    border-left: 5px solid var(--low-priority-color);
+}
+
+.medium {
+    border-left: 5px solid var(--medium-priority-color);
+}
+
+.high {
+    border-left: 5px solid var(--high-priority-color);
 }

@@ -1,62 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="main.js" defer></script>
 
     <title>Odin Todo List</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="sidebar flex flexColumn">
-        <div class="heading">
-           Projects   
-        </div>
-        <ul id="projectsList">
-            <li class="flex" id="addProject">
-                <span>Add project</span>
-                <button class="newProjectBtn">+</button>
-            </li>
-            <li class="addProjectMenuWrapper hidden">
-                <form onsubmit="return false;" class="addForm addProjectMenu" id="addProjectForm">
-                    <input type="text" name="projectName" id="formProjectName" placeholder="Project name" autocomplete="off">
-                </form>
-                <div class="addFormBtns flex">
-                    <button class="addFormMainBtn" id="addProjectBtn" disabled>Add</button>
-                    <button class="addFormCancelBtn" id="addProjectCancel">Cancel</button>
-                </div>
-            </li>
-        </ul>
+      <div class="heading">Projects</div>
+      <ul id="projectsList">
+        <li class="flex" id="addProject">
+          <span>Add project</span>
+          <button class="newProjectBtn">+</button>
+        </li>
+        <li class="addProjectMenuWrapper hidden">
+          <form
+            onsubmit="return false;"
+            class="addForm addProjectMenu"
+            id="addProjectForm"
+          >
+            <input
+              type="text"
+              name="projectName"
+              id="formProjectName"
+              placeholder="Project name"
+              autocomplete="off"
+            />
+          </form>
+          <div class="addFormBtns flex">
+            <button class="addFormMainBtn" id="addProjectBtn" disabled>
+              Add
+            </button>
+            <button class="addFormCancelBtn" id="addProjectCancel">
+              Cancel
+            </button>
+          </div>
+        </li>
+      </ul>
     </div>
     <main class="flex">
-        <div class="projectDisplay flex flexColumn">
-            <div class="projectTitle"></div>
-            <ul class="todosList">
-                <li id="addTodo">
-                    <button class="addTaskBtn">+</button>
-                    <span>Add task</span>
-                </li>
-                <li class="addTodoMenuWrapper hidden">
-                    <form onsubmit="return false;" class="addForm" id="addTodoForm">
-                        <input type="text" name="todoName" id="formTodoName" placeholder="Task name" autocomplete="off">
-                        <textarea name="todoDesc" id="formTodoDesc" placeholder="Description"></textarea>
-                        <input type="date" name="todoDueDate" id="formTodoDueDate">
-                        <select name="todoPriority" id="formTodoPriority">
-                            <option value="None">None</option>
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
-                        </select>
-                    </form>
-                    <div class="addFormBtns flex">
-                        <button class="addFormMainBtn" id="addTodoBtn" disabled>Add Task</button>
-                        <button class="addFormCancelBtn" id="addTodoCancel">Cancel</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
+      <div class="projectDisplay flex flexColumn">
+        <div class="projectTitle"></div>
+        <ul class="todosList">
+          <li id="addTodo">
+            <button class="addTaskBtn">+</button>
+            <span>Add task</span>
+          </li>
+          <li class="addTodoMenuWrapper hidden">
+            <form onsubmit="return false;" class="addForm" id="addTodoForm">
+              <input
+                type="text"
+                name="todoName"
+                id="formTodoName"
+                placeholder="Task name"
+                autocomplete="off"
+              />
+              <textarea
+                name="todoDesc"
+                id="formTodoDesc"
+                placeholder="Description"
+              ></textarea>
+              <input type="date" name="todoDueDate" id="formTodoDueDate" />
+              <select name="todoPriority" id="formTodoPriority">
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </form>
+            <div class="addFormBtns flex">
+              <button class="addFormMainBtn" id="addTodoBtn" disabled>
+                Add Task
+              </button>
+              <button class="addFormCancelBtn" id="addTodoCancel">
+                Cancel
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
     </main>
-</body>
+  </body>
 </html>

@@ -3,28 +3,67 @@ import Project from './project';
 import Todo from './todo';
 
 export default class storage {
-    static storeData(app) {
-        window.localStorage.setItem("app", JSON.stringify(app));
+  static checkData() {
+    let tempApp = {};
+    if (!localStorage.getItem('app')) {
+      tempApp = new App();
+      tempApp.activeProject.addTodo(
+        new Todo(
+          "Here's a test todo!",
+          "And here's a test description!",
+          '2022-04-30',
+          'Low',
+        ),
+      );
+      tempApp.activeProject.addTodo(
+        new Todo(
+          "Here's another test todo!",
+          "And here's another test description!",
+          '2022-04-30',
+          'Medium',
+        ),
+      );
+      tempApp.activeProject.addTodo(
+        new Todo(
+          'One more test todo!',
+          'One more test description!',
+          '2022-04-30',
+          'High',
+        ),
+      );
+    } else {
+      tempApp = this.restoreData();
     }
+    return tempApp;
+  }
 
-    static restoreData() {
-        let app = JSON.parse(window.localStorage.getItem("app"));
-        let tempApp = new App();
-        tempApp.allProjects = [];
-        app._allProjects.forEach((project) => {
-            let tempProject = new Project(project._title);
-            tempProject.id = project._id;
-            tempProject.projectTodos = [];
-            // Loop to iterate over each project's todos
-            project._projectTodos.forEach((todo) => {
-                let tempTodo = new Todo(todo._title, todo._description, todo._dueDate, todo._priority);
-                tempTodo.complete = todo._complete;
-                tempTodo.id = todo._id;
-                tempProject.projectTodos.push(tempTodo);
-            });
-            tempApp.allProjects.push(tempProject);
-        });
-        tempApp.activeProject = tempApp.findProject(app._activeProject._id);
-        return tempApp;
-    }
+  static storeData(app) {
+    window.localStorage.setItem('app', JSON.stringify(app));
+  }
+
+  static restoreData() {
+    const app = JSON.parse(window.localStorage.getItem('app'));
+    const tempApp = new App();
+    tempApp.setAllProjects([]);
+    app.allProjects.forEach((project) => {
+      const tempProject = new Project(project.title);
+      tempProject.setID(project.id);
+      tempProject.setProjectTodos([]);
+      // Loop to iterate over each project's todos
+      project.projectTodos.forEach((todo) => {
+        const tempTodo = new Todo(
+          todo.title,
+          todo.description,
+          todo.dueDate,
+          todo.priority,
+        );
+        tempTodo.complete = todo.complete;
+        tempTodo.id = todo.id;
+        tempProject.getProjectTodos().push(tempTodo);
+      });
+      tempApp.getAllProjects().push(tempProject);
+    });
+    tempApp.setActiveProject(tempApp.findProject(app.activeProject.id));
+    return tempApp;
+  }
 }

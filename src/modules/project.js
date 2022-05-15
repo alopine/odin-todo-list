@@ -1,57 +1,55 @@
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export default class Project {
-    constructor(title) {
-        this._id = uuid();
-        this._title = title;
-        this._projectTodos = [];
-    }
+  constructor(title) {
+    this.id = uuid();
+    this.title = title;
+    this.projectTodos = [];
+  }
 
-    get id() {
-        return this._id;
-    }
+  getID() {
+    return this.id;
+  }
 
-    set id(arg) {
-        if (arg) {
-            this._id = arg;
-        }
+  setID(arg) {
+    if (arg) {
+      this.id = arg;
     }
+  }
 
-    get title() {
-        return this._title;
-    }
+  getTitle() {
+    return this.title;
+  }
 
-    set title(arg) {
-        if (arg) {
-            this._title = arg;
-        }
+  setTitle(arg) {
+    if (arg) {
+      this.title = arg;
     }
+  }
 
-    get projectTodos() {
-        return this._projectTodos;
-    }
+  getProjectTodos() {
+    return this.projectTodos;
+  }
 
-    set projectTodos(arg) {
-        if (arg) {
-            this._projectTodos = arg;
-        }
+  setProjectTodos(arg) {
+    if (arg) {
+      this.projectTodos = arg;
     }
+  }
 
-    addTodo(newTodo) {
-        if (this.projectTodos.find((todo) => todo.id === newTodo.id)) {
-            return;
-        } else {
-            this.projectTodos.push(newTodo);
-        }
+  addTodo(newTodo) {
+    if (!this.projectTodos.find((todo) => todo.id === newTodo.id)) {
+      this.projectTodos.push(newTodo);
     }
+  }
 
-    deleteTodo(delTodoID) {
-        this.projectTodos = this.projectTodos.filter((todo) => todo.id !== delTodoID);
-    }
+  deleteTodo(delTodoID) {
+    this.projectTodos = this.projectTodos.filter(
+      (todo) => todo.id !== delTodoID,
+    );
+  }
 
-    findTodo(id) {
-        if (id) {
-            return this.projectTodos.find((todo) => todo.id === id);
-        }
-    }
+  findTodo(id) {
+    return this.projectTodos.find((todo) => todo.id === id);
+  }
 }

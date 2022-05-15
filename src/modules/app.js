@@ -1,46 +1,42 @@
-import Project from "./project";
+import Project from './project';
 
 export default class App {
-    constructor() {
-        this._allProjects = [new Project("Inbox")];
-        this._activeProject = this.allProjects[0];
-    }
+  constructor() {
+    this.allProjects = [new Project('Inbox')];
+    this.activeProject = this.getAllProjects()[0];
+  }
 
-    get allProjects() {
-        return this._allProjects;
-    }
+  getAllProjects() {
+    return this.allProjects;
+  }
 
-    set allProjects(arg) {
-        if (arg) {
-            this._allProjects = arg;
-        }
+  setAllProjects(arg) {
+    if (arg) {
+      this.allProjects = arg;
     }
+  }
 
-    get activeProject() {
-        return this._activeProject;
-    }
+  getActiveProject() {
+    return this.activeProject;
+  }
 
-    set activeProject(arg) {
-        if (arg) {
-            this._activeProject = arg;
-        }
+  setActiveProject(arg) {
+    if (arg) {
+      this.activeProject = arg;
     }
+  }
 
-    addProject(newProject) {
-        if (this.allProjects.find((project) => project.id === newProject.id)) {
-            return;
-        } else {
-            this.allProjects.push(newProject);
-        }
+  addProject(newProject) {
+    if (!this.allProjects.find((project) => project.id === newProject.id)) {
+      this.allProjects.push(newProject);
     }
+  }
 
-    deleteProject(id) {
-        this.allProjects = this.allProjects.filter((project) => project.id !== id);
-    }
+  deleteProject(id) {
+    this.allProjects = this.allProjects.filter((project) => project.id !== id);
+  }
 
-    findProject(id) {
-        if (id) {
-            return this.allProjects.find((project) => project.id === id);
-        }
-    }
+  findProject(id) {
+    return this.allProjects.find((project) => project.id === id);
+  }
 }

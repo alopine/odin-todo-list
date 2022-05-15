@@ -1,369 +1,409 @@
 /* || Custom properties */
 
 :root {
-    --main-text-color: #EEEEEE;
-    --highlight-color: #DE4C4A;
-    --hover-color: #363636;
-    --outline-color: #808080;
-    --main-bg-color: #1F1F1F;
-    --sidebar-color: #282828;
-    --low-priority-color: #5297FF;
-    --medium-priority-color: #FF9A14;
-    --high-priority-color: #FF7066;
+  --main-text-color: #eeeeee;
+  --highlight-color: #de4c4a;
+  --hover-color: #363636;
+  --outline-color: #808080;
+  --main-bg-color: #1f1f1f;
+  --sidebar-color: #282828;
+  --low-priority-color: #5297ff;
+  --medium-priority-color: #ff9a14;
+  --high-priority-color: #ff7066;
 }
-
 
 /* || General styles */
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 body {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: minmax(min-content, 2fr) 5fr;
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--main-text-color);
+  height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(min-content, 2fr) 5fr;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--main-text-color);
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .flexColumn {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 /* || Sidebar */
 
 .sidebar {
-    background-color: var(--sidebar-color);
-    padding: 2rem 2rem 0;
+  background-color: var(--sidebar-color);
+  padding: 2rem 2rem 0;
 }
 
 .heading {
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 0.5rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 .newProjectBtn {
-    border: 0;
-    background-color: transparent;
-    font-size: 1rem;
-    color: var(--main-text-color);
-    margin-right: 0.5rem;
+  border: 0;
+  background-color: transparent;
+  font-size: 1rem;
+  color: var(--main-text-color);
+  margin-right: 0.5rem;
 }
 
-.projectsEntry, #addProject, .editProjectWrapper {
-    padding: 0.5rem;
-    height: 2rem;
+.projectsEntry,
+#addProject,
+.editProjectWrapper {
+  padding: 0.5rem;
+  height: 2rem;
 }
 
-.newProject, .projectsEntry, #addProject, .editProjectWrapper {
-    border-radius: 5px;
+.newProject,
+.projectsEntry,
+#addProject,
+.editProjectWrapper {
+  border-radius: 5px;
 }
 
-#addProject:hover, .projectsEntry:hover, .todoRight>button:hover, .activeProject, .editProjectWrapper {
-    background-color: var(--hover-color);
+#addProject:hover,
+.projectsEntry:hover,
+.todoRight > button:hover,
+.activeProject,
+.editProjectWrapper {
+  background-color: var(--hover-color);
 }
 
-.projectBtnsWrapper button, .newProjectBtn {
-    display: none;
+.projectBtnsWrapper button,
+.newProjectBtn {
+  display: none;
 }
 
-.projectsEntry:hover .projectBtnsWrapper button, #addProject:hover .newProjectBtn {
-    display: initial;
+.projectsEntry:hover .projectBtnsWrapper button,
+#addProject:hover .newProjectBtn {
+  display: initial;
 }
 
 /* || Add Project Menu */
 
-.sidebar form>input, .editProjectWrapper>input {
-    height: 1rem;
+.sidebar form > input,
+.editProjectWrapper > input {
+  height: 1rem;
 }
 
 #formProjectName {
-    background-color: var(--sidebar-color);
+  background-color: var(--sidebar-color);
 }
 
 /* || Edit Project */
 .editProject .editProjectWrapper {
-    column-gap: 1rem;
-    align-items: center;
+  column-gap: 1rem;
+  align-items: center;
 }
 
 .editProjectName {
-    background-color: var(--hover-color);
+  background-color: var(--hover-color);
 }
 
 .editProjectWrapper button:disabled svg {
-    stroke: var(--outline-color);
+  stroke: var(--outline-color);
 }
 
 /* || Main */
 
 main {
-    background-color: var(--main-bg-color);
-    justify-content: center;
+  background-color: var(--main-bg-color);
+  justify-content: center;
 }
 
 .projectDisplay {
-    width: 90%;
-    padding: 2rem;
+  width: 90%;
+  padding: 2rem;
 }
 
 .projectTitle {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-#projectsList, .todosList {
-    list-style-type: none;
+#projectsList,
+.todosList {
+  list-style-type: none;
 }
 
-.todosList>li {
-    border-top: 1px solid var(--hover-color);
+.todosList > li {
+  border-top: 1px solid var(--hover-color);
 }
 
-.todosList>li:first-child {
-    border-top: none;
+.todosList > li:first-child {
+  border-top: none;
 }
 
-.projectTodo, #addTodo {
-    padding: 0.5rem;
+.projectTodo,
+#addTodo {
+  padding: 0.5rem;
 }
 
-.projectTodo, .projectsEntry, #addProject, .editProjectWrapper {
-    justify-content: space-between;
+.projectTodo,
+.projectsEntry,
+#addProject,
+.editProjectWrapper {
+  justify-content: space-between;
 }
 
-.projectTodo>div, .projectsEntry, .editProjectWrapper {
-    align-items: center;
+.projectTodo > div,
+.projectsEntry,
+.editProjectWrapper {
+  align-items: center;
 }
 
 .taskCheckbox {
-    border: 1px solid var(--outline-color);
-    transition: 0.3s;
+  border: 1px solid var(--outline-color);
+  transition: 0.3s;
 }
 
 .taskCheckbox:hover {
-    background-color: var(--outline-color);
-    transition: 0.3s;
+  background-color: var(--outline-color);
+  transition: 0.3s;
 }
- 
+
 .todoRight {
-    column-gap: 1rem;
-    color: var(--outline-color);
+  column-gap: 1rem;
+  color: var(--outline-color);
 }
 
-.todoRight>button, .projectBtnsWrapper>button, .editProject button {
-    border: 0;
-    border-radius: 5px;
-    background-color: transparent;
-    color: var(--main-text-color);
-    height: 24px;
-} 
+.todoRight > button,
+.projectBtnsWrapper > button,
+.editProject button {
+  border: 0;
+  border-radius: 5px;
+  background-color: transparent;
+  color: var(--main-text-color);
+  height: 24px;
+}
 
-.taskCheckbox, .addTaskBtn {
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    margin-right: 0.5rem;
-    background-color: transparent;
+.taskCheckbox,
+.addTaskBtn {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  background-color: transparent;
 }
 
 .complete {
-    color: var(--outline-color);
-    text-decoration: line-through;
+  color: var(--outline-color);
+  text-decoration: line-through;
 }
 
 .complete .taskCheckbox {
-    background-color: var(--outline-color);
+  background-color: var(--outline-color);
 }
 
- .newProjectBtn, .addTaskBtn { 
-    line-height: 1rem;
+.newProjectBtn,
+.addTaskBtn {
+  line-height: 1rem;
 }
 
-#addProject span, .newProjectBtn, #addTodo span, .editProjectName {
-    color: var(--outline-color);
+#addProject span,
+.newProjectBtn,
+#addTodo span,
+.editProjectName {
+  color: var(--outline-color);
 }
 
-#addProject:hover span, #addProject:hover .newProjectBtn, .addTask:hover span, .addTaskBtn {
-    color: var(--highlight-color);
+#addProject:hover span,
+#addProject:hover .newProjectBtn,
+.addTask:hover span,
+.addTaskBtn {
+  color: var(--highlight-color);
 }
 
 .addTask:hover .addTaskBtn {
-    color: var(--main-text-color);
-    background-color: var(--highlight-color);
+  color: var(--main-text-color);
+  background-color: var(--highlight-color);
 }
 
 /* || Add Task Menu */
-.addProjectMenuWrapper, .addTodoMenuWrapper {
-    padding-top: 0.5rem;
+.addProjectMenuWrapper,
+.addTodoMenuWrapper {
+  padding-top: 0.5rem;
 }
 
-.addForm, form input[type="date"], form select {
-    border: 1px solid var(--hover-color);
-    border-radius: 10px;
-    padding: 0.5rem;
+.addForm,
+form input[type="date"],
+form select {
+  border: 1px solid var(--hover-color);
+  border-radius: 10px;
+  padding: 0.5rem;
 }
 
-input, select, textarea {
-    font-size: 1em;
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--main-text-color);
-    outline: none;
+input,
+select,
+textarea {
+  font-size: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--main-text-color);
+  outline: none;
 }
 
-main form>input, main form>select, main form>textarea {
-    background-color: var(--main-bg-color);
+main form > input,
+main form > select,
+main form > textarea {
+  background-color: var(--main-bg-color);
 }
 
-form input[type="date"], form select {
-    border-radius: 5px;
-    padding: 0.25rem;
+form input[type="date"],
+form select {
+  border-radius: 5px;
+  padding: 0.25rem;
 }
 
 ::-webkit-calendar-picker-indicator {
-    color-scheme: dark;
+  color-scheme: dark;
 }
 
-input[type="text"], textarea {
-    width: 100%;
+input[type="text"],
+textarea {
+  width: 100%;
 }
 
 form input[type="text"] {
-    height: 1rem;
-    margin-bottom: 0.5rem;
+  height: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 form textarea {
-    resize: none;
-    overflow-y: auto;
-    padding-right: 1rem;
+  resize: none;
+  overflow-y: auto;
+  padding-right: 1rem;
 }
 
 .addFormBtns {
-    margin-top: 0.5rem;
-    column-gap: 0.75rem;
+  margin-top: 0.5rem;
+  column-gap: 0.75rem;
 }
 
 .addFormMainBtn {
-    background-color: var(--highlight-color);
+  background-color: var(--highlight-color);
 }
 
-.addFormMainBtn:hover:enabled{
-    background-color: #C53727;
+.addFormMainBtn:hover:enabled {
+  background-color: #c53727;
 }
 
 .addFormMainBtn:disabled {
-    filter: brightness(0.8);
+  filter: brightness(0.8);
 }
 
 .addFormCancelBtn {
-    background-color: #292929;
+  background-color: #292929;
 }
 
 .addFormCancelBtn:hover {
-    background-color: #3D3D3D;
+  background-color: #3d3d3d;
 }
 
-.addFormMainBtn, .addFormCancelBtn {
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    color: var(--main-text-color);
-    font-size: 0.9rem;
-    padding: 0.5rem 0.75rem;
+.addFormMainBtn,
+.addFormCancelBtn {
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  color: var(--main-text-color);
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
 }
 
 /* || Modal */
 .modal {
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: #000000;
-    background-color: #00000040;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #000000;
+  background-color: #00000040;
+  justify-content: center;
+  align-items: center;
 }
 
 .modalContent {
-    width: 100%;
-    max-width: 45%;
-    min-height: 45%;
-    background-color: var(--sidebar-color);
-    border-radius: 10px;
-    padding: 2rem;
-    row-gap: 1rem;
+  width: 100%;
+  max-width: 45%;
+  min-height: 45%;
+  background-color: var(--sidebar-color);
+  border-radius: 10px;
+  padding: 2rem;
+  row-gap: 1rem;
 }
 
 .modalHeader {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .modalTitle {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .modalCloseBtn {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .modalCloseBtn:hover svg {
-    stroke: var(--main-text-color);
+  stroke: var(--main-text-color);
 }
 
 .modalTodoTitle {
-    font-size: 1.5rem;
-    font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .modalTodoDescription {
-    max-height: 25vh;
-    overflow-y: auto;
+  max-height: 25vh;
+  overflow-y: auto;
 }
 
 .modalTodoInfo {
-    column-gap: 0.5rem;
+  column-gap: 0.5rem;
 }
 
-.modalTodoInfo>div {
-    border: 1px solid var(--outline-color);
-    border-radius: 5px;
-    padding: 0.3rem 0.6rem;
+.modalTodoInfo > div {
+  border: 1px solid var(--outline-color);
+  border-radius: 5px;
+  padding: 0.3rem 0.6rem;
 }
 
-.modal form>input, .modal form>select, .modal form>textarea {
-    background-color: var(--sidebar-color);
+.modal form > input,
+.modal form > select,
+.modal form > textarea {
+  background-color: var(--sidebar-color);
 }
 
 /* || Todo Priority */
 .low {
-    border-left: 5px solid var(--low-priority-color);
+  border-left: 5px solid var(--low-priority-color);
 }
 
 .medium {
-    border-left: 5px solid var(--medium-priority-color);
+  border-left: 5px solid var(--medium-priority-color);
 }
 
 .high {
-    border-left: 5px solid var(--high-priority-color);
+  border-left: 5px solid var(--high-priority-color);
 }

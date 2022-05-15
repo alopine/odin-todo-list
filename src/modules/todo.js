@@ -1,70 +1,70 @@
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export default class Todo {
-    constructor(title, description, dueDate, priority) {
-        this._id = uuid();
-        this._title = title;
-        this._description = description;
-        this._dueDate = dueDate;
-        this._priority = priority;
-        this._complete = false;
-    }
+  constructor(title, description, dueDate, priority) {
+    this.id = uuid();
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.complete = false;
+  }
 
-    get id() {
-        return this._id;
-    }
+  getID() {
+    return this.id;
+  }
 
-    set id(arg) {
-        if (arg) {
-            this._id = arg;
-        }
+  setID(arg) {
+    if (arg) {
+      this.id = arg;
     }
+  }
 
-    get title() {
-        return this._title;
-    }
+  getTitle() {
+    return this.title;
+  }
 
-    set title(arg) {
-        if (arg) {
-            this._title = arg;
-        }
+  setTitle(arg) {
+    if (arg) {
+      this.title = arg;
     }
+  }
 
-    get description() {
-        return this._description;
-    }
+  getDescription() {
+    return this.description;
+  }
 
-    set description(arg) {
-        if (arg) {
-            this._description = arg;
-        }
+  setDescription(arg) {
+    if (arg) {
+      this.description = arg;
     }
+  }
 
-    get dueDate() {
-        return this._dueDate;
-    }
+  getDueDate() {
+    return this.dueDate;
+  }
 
-    set dueDate(arg) {
-        if (arg) {
-            this._dueDate = arg;
-        }
+  setDueDate(arg) {
+    if (arg) {
+      this.dueDate = arg;
     }
+  }
 
-    get priority() {
-        return this._priority;
-    }
+  getPriority() {
+    return this.priority;
+  }
 
-    set priority(arg) {
-        if (arg) {
-            this._priority = arg;
-        }
+  setPriority(arg) {
+    if (arg) {
+      this.priority = arg;
     }
+  }
 
-    get complete() {
-        return this._complete;
-    }
+  getComplete() {
+    return this.complete;
+  }
 
-    set complete(arg) {
-        this._complete = arg;
-    }
+  setComplete(arg) {
+    this.complete = arg;
+  }
 }

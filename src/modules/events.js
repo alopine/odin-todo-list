@@ -1,4 +1,4 @@
-import {app} from '../index'
+import {app} from '../index';
 import storage from './storage';
 import display from './display';
 
@@ -55,7 +55,7 @@ export default class events {
             } else {
                 this.switchActiveProject(projectEntry.id);
             }
-        })
+        });
     }
 
     static switchActiveProject(id) {
@@ -257,7 +257,7 @@ export default class events {
     static editTodoSubmit(todo) {
         const submit = document.getElementById("editTodoBtn");
         submit.addEventListener("click", () => {
-            display.editTodoSubmit(todo)
+            display.editTodoSubmit(todo);
             display.closeTodoModal();
             display.updateTodo(todo);
             storage.storeData(app);

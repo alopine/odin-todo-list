@@ -1,5 +1,5 @@
 import './style.css';
-import App from './modules/app'
+import App from './modules/app';
 import Todo from './modules/todo';
 import events from './modules/events';
 import storage from './modules/storage';
